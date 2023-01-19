@@ -53,7 +53,7 @@ int main(int argc, char *argv[]) {
 	/* Command-line error check. Not extremely rigorous, but should suffice. */
     if (argc != 4 || detect_int(argv[1]) == 0) {
     	fprintf(stderr, "ERROR: Invalid argument(s)\n"\
-    					"USAGE: proj1.out <thread_num> <input_file.txt> <output_file.txt>\n");
+    					"USAGE: proj1.out <NUM_THREADS> <input_file.txt> <output_file.txt>\n");
         return EXIT_FAILURE;
     }
 
