@@ -77,7 +77,7 @@ int main(int argc, char *argv[]) {
    	/* Create several worker threads to compress different data blocks */
    	for (size_t i=0; i<NUM_THREADS; ++i) {
    		/* Define data block */
-    	int data_block[DATA_BLOCK_SIZE] = {i};
+    	int data_block[DATA_BLOCK_SIZE] = {i}; // --> Change {i} to an input filestream data block
 
    		/* Initialize data packet for this specific thread */
 		struct ThreadPacket tp;
@@ -97,6 +97,7 @@ int main(int argc, char *argv[]) {
         if (retval == PTHREAD_CANCELED) {
             fprintf(stderr, "ERROR: Thread #%d was cancelled\n", (int)i);
         }
+        // Otherwise, write the compressed data to the output file
         else {
         	char* file_str = calloc(1, 1000);
         	fscanf(input_fp, "%s", file_str); // --> You'll have to replace this with compressed data blocks
