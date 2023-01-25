@@ -23,7 +23,7 @@ Execute line:
 ```
 ./proj1.out <num_threads> <input_file>
 ```
----> num_threads specifies the number of worker threads you would like to generate
+---> The arguments are <number of worker threads you would like to run> <your input file>\n
 ---> There are argument checks in the code that will inform you of any command-line errors you make.
 Example execute line:
 ```
@@ -36,9 +36,9 @@ unzstd ds9.txt.zst
 ```
 
 ### Code Structure
-The code itself has plenty of documentation explaining what is happening step-by-step, but a high level overview looks like this:
+The proj1.c file has plenty of documentation explaining what is happening step-by-step, but a high level overview looks like this:
 1) File and data initialization
-2) For each thread specified by the user, read input data as a 16kB block, and send that data block to a threading function to be compressed.
+2) For each thread specified bunzstd input.txt.zst"y the user, read input data as a 16kB block, and send that data block to a threading function to be compressed.
 3) Whenever one thread ends, write its output data to an output file, read another input data block, and start another thread.
 4) Once all threads have been exhausted and all data has been written, do some memory cleanup and end the program.
 
