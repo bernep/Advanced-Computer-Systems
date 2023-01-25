@@ -3,7 +3,7 @@ A public repository for our projects in ECSE 6320: Advanced Computer Systems
 
 ## Project 1: Compression and Multithreading
 ### Overview
-This project heavily employs the functions of the `pthread` and `zstd` libraries. Specifically, the proj1.c file takes some input file and compresses it into a .zst file (i.e. an archive file) using a specified number of worker threads.
+This project heavily employs the functions of the `pthread` and `zstd` libraries. Specifically, the `proj1.c` file takes some input file and compresses it into a .zst file (i.e. an archive file) using a specified number of worker threads.
 
 ### Usage
 Open a command terminal in a directory containing the project files, and use the commands below to compile run the code. The necessary files you will need are:
@@ -15,9 +15,9 @@ common.h
 
 Compile line:
 ```
-gcc proj1.c -lzstd -I/usr/include/zstd -L/usr/lib -pthread -o proj1.out
+gcc proj1.c -lzstd -I/usr/include/zstd -L/usr/lib -pthread -o proj1.out -fno-stack-protector
 ```
-This will compile your code using the ZSTD and pthread libraries.
+This will compile your code using the ZSTD and pthread libraries. In case you cannot get the compiler towork on your system, you can just run the included `proj.o` file using the execution line below.
 
 Execute line:
 ```
