@@ -1,10 +1,6 @@
 /* proj1.c */
 /* Patrick Berne, Andre Shibata */
 
-/* Example Compile Line: "gcc proj1.c -lzstd -I/usr/include/zstd -L/usr/lib -pthread -o proj1.out" */
-/* Example Execute Line: "./proj1.out 10 input.txt"*/
-/* Example Uncompress Line: "unzstd input.txt.zst" */
-
 // Import Libraries
 #include <stdio.h>
 #include <stdlib.h>
@@ -134,6 +130,7 @@ int main(int argc, char *argv[]) {
             pthread_create(threads+i, NULL, compress_data, (void*)(&packets[i]));
         } 
         // Otherwise, if no more data is read, finish executing current threads and write to output file
+        // ---> This code block will only ever run if you specify too many threads or your input file is small
         else {
             // Finish executing threads
             for (size_t j=0; j<i; j++) {
