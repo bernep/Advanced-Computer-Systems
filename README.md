@@ -6,7 +6,14 @@ A public repository for our projects in ECSE 6320: Advanced Computer Systems
 This project delves into multithreading and compression. Specifically, the proj1.c file takes some input file and compresses it into a .zst file (i.e. an archive file).
 
 ### Usage
-Open a command terminal in a directory containing all these files. Here are some example commands.
+Open a command terminal in a directory containing the project files. The necessary files you will need are:
+```
+proj1.c
+common.h
+<input file>
+``` 
+
+Here are some example commands to compile and run the code.
 Compile line:
 ```
 gcc proj1.c -lzstd -I/usr/include/zstd -L/usr/lib -pthread -o proj1.out
