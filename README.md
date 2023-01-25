@@ -17,8 +17,7 @@ Compile line:
 ```
 gcc proj1.c -lzstd -I/usr/include/zstd -L/usr/lib -pthread -o proj1.out -fno-stack-protector
 ```
-This will compile your code using the ZSTD and pthread libraries (assuming you have them installed). In case you cannot get the compiler to work on your system, you can just run the included `proj1.out` file using the execution line below. <br />
-As a note, `-fno-stack-protector` may not be needed on your system. On the three machines we tested, it was needed on one of them due to a memory management issue, although this only occurred when either the input file was excessively large or too many threads were called on.
+This will compile your code using the ZSTD and pthread libraries (assuming you have them installed). In case you cannot get the compiler to work on your system, you can just run the included `proj1.out` file using the execution line below. As a note, `-fno-stack-protector` may not be needed on your system. On the three machines we tested, it was needed on one of them due to a memory management issue, although this only occurred when either the input file was excessively large or too many threads were called on.
 
 Execute line:
 ```
