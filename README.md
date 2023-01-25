@@ -17,19 +17,20 @@ Compile line:
 ```
 gcc proj1.c -lzstd -I/usr/include/zstd -L/usr/lib -pthread -o proj1.out -fno-stack-protector
 ```
-This will compile your code using the ZSTD and pthread libraries. In case you cannot get the compiler towork on your system, you can just run the included `proj1.out` file using the execution line below.
+This will compile your code using the ZSTD and pthread libraries (assuming you have them installed). In case you cannot get the compiler towork on your system, you can just run the included `proj1.out` file using the execution line below.
 
 Execute line:
 ```
 ./proj1.out <num_threads> <input_file>
 ```
 The arguments are `<number of worker threads you would like to run>` and `<your input file>`<br />
-Once run, you will receive your input file as a compressed `.zst` file in the same directory.
+Once run, you will receive your input file as a compressed `.zst` file in the same directory. <br />
+Here is an example execute command:
 ```
 ./proj1.out 10 ds9.txt
 ```
 
-Uncompress line (to test that the file is uncorrupted):
+If you don't have an archive extraction program installed, you can use ZSTD's `unzstd` function to uncompress the file for you. Using the above input file as an example, you can run the following command:
 ```
 unzstd ds9.txt.zst
 ```
