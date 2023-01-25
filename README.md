@@ -49,7 +49,7 @@ And additionally, the threading function overview is as follows:
 ### Experimental Results
 For the purposes of testing and data collection, a test file, video.mp4 with 36.48 Megabytes, was used. We collected the time taken by the algorithm to compress the test file, under the conditions of 1,2,3,4,5,6,7,8,9,10,15,20,30,40, and 50 threads. By inputting such data on excel, the graph below was created. The time recorded is the time taken by the entire program to run.
 
-![alt text] (https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%201/results.png)
+![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%201/results.png)
 
 ### Analysis and Conclusion
 
