@@ -17,7 +17,8 @@ Compile line:
 ```
 gcc proj1.c -lzstd -I/usr/include/zstd -L/usr/lib -pthread -o proj1.out -fno-stack-protector
 ```
-This will compile your code using the ZSTD and pthread libraries (assuming you have them installed). In case you cannot get the compiler to work on your system, you can just run the included `proj1.out` file using the execution line below.
+This will compile your code using the ZSTD and pthread libraries (assuming you have them installed). In case you cannot get the compiler to work on your system, you can just run the included `proj1.out` file using the execution line below. <br />
+As a note, `-fno-stack-protector` may not be needed on your system. On the three machines we tested, it was needed on one of them due to a memory management issue, although this only occurred when either the input file was excessively large or too many threads were called on.
 
 Execute line:
 ```
@@ -61,4 +62,4 @@ When testing this on larger files (i.e. 1 GB or larger), the experimental curve 
 
 As we can see on the graph above, it's ideal to use at least 5 worker threads. The specific times for different thread allotments are 0.33 seconds (1 thread), 0.23 seconds (2 threads), 0.21 seconds (3 threads), and 0.17 seconds (4 threads). When 5 or more threads are used, the compression time stabilizes around 0.16 seconds, even when increasing the number of threads to upwards of 50 threads. A possible reason for this may be that the time it takes to set up the threads becomes more than the amount of time it take for the next thread in the queue to finish compression.
 
-Thus, we can see that although increasing the number of threads does make total compression time smaller, there is an optimal number of threads that can be used where any more than that would not lead to any significant decrease in time. Additionally, fewer threads leads to less memory being used anyway, so there's no reason to overdo the number of threads being used.
+Thus, we can see that although increasing the number of threads does make total compression time smaller, increasing the number of threads leads to diminishing returns. Additionally, fewer threads leads to less memory being used anyway, so there's no reason to overdo the number of threads since too many threads can cause memory overflow. A balance should be struck between the number of threads and processing time.
