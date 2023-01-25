@@ -6,14 +6,13 @@ A public repository for our projects in ECSE 6320: Advanced Computer Systems
 This project delves into multithreading and compression. Specifically, the proj1.c file takes some input file and compresses it into a .zst file (i.e. an archive file) using a specified number of worker threads.
 
 ### Usage
-Open a command terminal in a directory containing the project files. The necessary files you will need are:
+Open a command terminal in a directory containing the project files, and use the commands below to compile run the code. The necessary files you will need are:
 ```
 proj1.c
 common.h
 <input file>
 ``` 
 
-Here are some example commands to compile and run the code.
 Compile line:
 ```
 gcc proj1.c -lzstd -I/usr/include/zstd -L/usr/lib -pthread -o proj1.out
@@ -38,8 +37,8 @@ unzstd ds9.txt.zst
 
 ### Code Structure
 The code itself has plenty of documentation explaining what is happening step-by-step, but a high level overview looks like this:
-1) Initialization
-2) In a loop, read input data as a 16kB block, and send that data block to a threading function to be compressed.
+1) File and data initialization
+2) For each thread specified by the user, read input data as a 16kB block, and send that data block to a threading function to be compressed.
 3) Whenever one thread ends, write its output data to an output file, read another input data block, and start another thread.
 4) Once all threads have been exhausted and all data has been written, do some memory cleanup and end the program.
 
