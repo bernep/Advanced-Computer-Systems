@@ -1,7 +1,7 @@
 # Advanced-Computer-Systems
 A public repository for our projects in ECSE 6320: Advanced Computer Systems
 
-## Project 1
+## Project 1: Compression and Multithreading
 ### Overview
 This project delves into multithreading and compression. Specifically, the proj1.c file takes some input file and compresses it into a .zst file (i.e. an archive file) using a specified number of worker threads.
 
