@@ -3,7 +3,7 @@ A public repository for our projects in ECSE 6320: Advanced Computer Systems
 
 ## Project 1
 ### Overview
-This project delves into multithreading and compression. Specifically, the proj1.c file takes some input file and compresses it into a .zst file (i.e. an archive file).
+This project delves into multithreading and compression. Specifically, the proj1.c file takes some input file and compresses it into a .zst file (i.e. an archive file) using a specified number of worker threads.
 
 ### Usage
 Open a command terminal in a directory containing the project files. The necessary files you will need are:
