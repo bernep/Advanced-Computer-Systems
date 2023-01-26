@@ -57,6 +57,8 @@ For the purposes of testing and data collection, a test file, `video.mp4` with 3
 
 When testing this on larger files (i.e. 1 GB or larger), the experimental curve remains about the same. The time to process the input file scales in a roughly O(n) fashion depending on file size.
 
+One important thing to note: if you're trying to compress a small file, it will be noticeably bigger when uncompressing it because this program writes data exactly as 16kB blocks, meaning any file you uncompress will be anywhere from 1 byte to 16kB larger than it should be. This extra data has no effect on any of the various filetypes we've tested; it's essentially just blank data. Since this program is meant for large files, this amount of extra data seems negligible, so we did not make much attempt to fix it given the deadline for this project and the scope of the requirements.
+
 ### Analysis and Conclusion
 
 As we can see on the graph above, it's ideal to use at least 5 worker threads. The specific times for different thread allotments are 0.33 seconds (1 thread), 0.23 seconds (2 threads), 0.21 seconds (3 threads), and 0.17 seconds (4 threads). When 5 or more threads are used, the compression time stabilizes around 0.16 seconds, even when increasing the number of threads to upwards of 50 threads. A possible reason for this may be that the time it takes to set up the threads becomes more than the amount of time it take for the next thread in the queue to finish compression.
