@@ -23,8 +23,7 @@ Execute line:
 ```
 ./proj1.out <num_threads> <input_file>
 ```
-The arguments are `<number of worker threads you would like to run>` and `<your input file>`<br />
-Once run, you will receive your input file as a compressed `.zst` file in the same directory. <br />
+The arguments are `<number of worker threads you would like to run>` and `<your input file>`. Once run, you will receive your input file as a compressed `.zst` file in the same directory. Make sure the file is allowed to run as an executable (which can be changed by going into the file's properties), otherwise your system may not let you run it. <br />
 Here is an example execute command:
 ```
 ./proj1.out 10 ds9.txt
