@@ -50,11 +50,11 @@ Worker thread:
 4) Perform memory cleanup and end the thread. The struct with the compressed data is stored elsewhere and can be accessed outside of the thread.
 
 ### Hardware Environment
-The CPU used to run this code was an Intel® Core™ i7-1260P Processor with the following specs:
----> 12 cores
----> 16 threads
----> 2.5GHz clock
----> 18MB cache
+The CPU used to run this code was an Intel® Core™ i7-1260P Processor with the following specs: <br>
+---> 12 cores <br>
+---> 16 threads <br>
+---> 2.5GHz clock <br>
+---> 18MB cache <br>
 
 ### Experimental Results
 For the purposes of testing and data collection, a test file, `video.mp4` with 36.48 Megabytes, was used. We collected the time taken by the algorithm to compress the test file, under the conditions of 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 30, 40, and 50 threads. The data below was collected through experimentation, and the graph was formatted in Excel. The time recorded is the time taken by the entire program to run.
