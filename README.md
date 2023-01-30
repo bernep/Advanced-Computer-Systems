@@ -50,7 +50,7 @@ Worker thread:
 4) Perform memory cleanup and end the thread. The struct with the compressed data is stored elsewhere and can be accessed outside of the thread.
 
 ### Experimental Results
-For the purposes of testing and data collection, a test file, `video.mp4` with 36.48 Megabytes, was used. We collected the time taken by the algorithm to compress the test file, under the conditions of 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 30, 40, and 50 threads. The data below was collected through experimentation, and the graph was formatted in Excel. The time recorded is the time taken by the entire program to run.
+The following results were obtained on a Windows machine capable of compiling C code using a `gcc` compiler. For the purposes of testing and data collection, a test file, `video.mp4` with 36.48 Megabytes, was used. We collected the time taken by the algorithm to compress the test file, under the conditions of 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 30, 40, and 50 threads. The data below was collected through experimentation, and the graph was formatted in Excel. The time recorded is the time taken by the entire program to run.
 
 ![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%201/results.png)
 
