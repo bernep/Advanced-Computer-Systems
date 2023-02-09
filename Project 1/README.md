@@ -1,9 +1,9 @@
-## Project 1: Compression and Multithreading
+## Project 1: Data Compression using Multiple Threads
 ### Overview
 This project heavily employs the functions of the `pthread` and `zstd` libraries. Specifically, the `proj1.c` file takes some input file and compresses it into a `.zst` file (i.e. an archive file) using a specified number of worker threads.
 
 ### Usage
-Open a command terminal in a directory containing the project files, and use the commands below to compile run the code. The necessary files you will need are:
+Open a command terminal in a directory containing the project files, and use the commands below to compile and run the code. The necessary files you will need are:
 ```
 proj1.c
 common.h
