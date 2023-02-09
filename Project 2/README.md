@@ -49,9 +49,13 @@ The CPU used to run this code was an `TBD` with the following specs: <br>
 ---> `TBD` threads <br>
 ---> `TBD` GHz clock <br>
 ---> `TBD` MB cache <br>
+<br>
 
 ### Experimental Results
 TBD
 
 ### Analysis and Conclusion
 TBD
+
+### Troubleshooting
+This program was run on Ubuntu 22.04 LTS. When trying this code on a Windows 11 laptop, there were execution errors. If you have issues running this code, please contact me (Patrick Berne) over Webex.
