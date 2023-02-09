@@ -2,7 +2,7 @@
 A public repository for showcasing our projects in ECSE 6320: Advanced Computer Systems.
 
 ## Project 1: Data Compression using Multiple Threads
-This project takes an input file and compresses it in 16kB data blocks using a specified number of worker threads. <br>
+This project takes an input file and compresses it into a series of 16kB data blocks using a specified number of worker threads. <br>
 ---> [Project 1 - Data Compression using Multiple Threads](https://github.com/bernep/Advanced-Computer-Systems/tree/main/Project%201)
 
 ## Project 2: Matrix-Matrix Multiplication with SIMD Instructions & Cache Miss Minimization
