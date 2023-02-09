@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <time.h>
 
 // Print flags (these are set by command-line arguments)
 int PROGRESS_PRINT = 0; // Initially disabled
@@ -185,6 +186,9 @@ void matrix_mult_fixed_unoptimized(short** mat_in1, short** mat_in2,\
 // Function: Main
 int main(int argc, char *argv[])
 {
+    // Begin execution timer
+    clock_t begin = clock();
+
     // Command-line error check.
     if (argc < 4 || detect_int(argv[1]) == 0 || detect_int(argv[2]) == 0\
         || (strcmp(argv[3],"-fo") != 0 && strcmp(argv[3],"-fu") != 0 &&
@@ -385,6 +389,11 @@ int main(int argc, char *argv[])
             free(mat_out);
         }
     }
+
+    // Print execution time
+    clock_t end = clock();
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    printf("\nELAPSED TIME:\n--->%f seconds\n", time_spent);
 
     return EXIT_SUCCESS;
 }
