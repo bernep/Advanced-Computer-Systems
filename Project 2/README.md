@@ -22,14 +22,14 @@ Arguments:<br>
 `<n>`: Size of input matrix (integer). This matrix will be of size n-by-n, and the output matrix will be equivalent to the square of input matrix.<br>
 `<seed>`: Randomizer seed (integer). This is a non-negative integer value that controls the internal C randomizer used by the program.<br>
 `<-arg1>`: Specifies which data type and instruction set to use.
-    `-fo` --> 4-byte floating-point data, SIMD instructions<br>
-    `-fu` --> 4-byte floating-point data, C instructions<br>
-    `-xo` --> 2-byte fixed-point data, SIMD instructions<br>
-    `-xu` --> 2-byte fixed-point data, C instructions<br>
-`<-arg2>`: Specifies print options (this argument is optional)
-    `-p` --> Print progress while computing matrices<br>
-    `-m` --> Print input and output matrices<br>
-    `-pm` --> Print progress and matrices<br>
+&emsp;`-fo` --> 4-byte floating-point data, SIMD instructions<br>
+&emsp;`-fu` --> 4-byte floating-point data, C instructions<br>
+&emsp;`-xo` --> 2-byte fixed-point data, SIMD instructions<br>
+&emsp;`-xu` --> 2-byte fixed-point data, C instructions<br>
+`<-arg2>`: Specifies print options (this argument is optional)<br>
+&emsp;`-p` --> Print progress while computing matrices<br>
+&emsp;`-m` --> Print input and output matrices<br>
+&emsp;`-pm` --> Print progress and matrices<br>
 
 Here is an example execute command:
 ```
