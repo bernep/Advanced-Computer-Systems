@@ -3,9 +3,9 @@
 This project showcases the performance differences between standard C instructions and [Intel's intrinsic SIMD x86 library](https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html).
 
 ### Usage
-Open a command terminal in a directory containing the project files, and use the commands below to compile run the code. The necessary files you will need are:
+Open a command terminal in a directory containing the `proj2.c` file, and use the commands below to compile and run the code.
 ```
-proj1.c
+proj2.c
 ``` 
 
 Compile line:
