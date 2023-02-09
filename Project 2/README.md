@@ -36,7 +36,7 @@ Here is an example execute command:
 ./proj2.out 10 10 -fo -pm
 ```
 
-Be careful not to print matrices (i.e. `-m` or `-pm`) when making `n` large. The program will significantly slow down and the output will be difficult to read. Additionally, progress (i.e. '-p') will not be a very helpful metric for small matrices, as it's meant to display progress for matrices of size 1000 or greater.
+Be careful not to print matrices (i.e. `-m` or `-pm`) when making `n` large. The program will significantly slow down and the output will be difficult to read. Additionally, progress (i.e. `-p`) will not be a very helpful metric for small matrices, as it's meant to display progress for matrices of size 1000 or greater.
 
 ### Code Structure
 The `proj2.c` file has plenty of documentation explaining what is happening step-by-step, but the following is more of a high-level overview.
