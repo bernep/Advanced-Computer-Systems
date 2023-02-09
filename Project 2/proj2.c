@@ -195,7 +195,7 @@ int main(int argc, char *argv[])
             strcmp(argv[3],"-xo") != 0 && strcmp(argv[3],"-xu") != 0)) {
 
         fprintf(stderr, "ERROR:\tInvalid argument(s)\n"\
-                        "USAGE:\tproj1.out <n> <seed> <-arg1> <-arg2> \n"\
+                        "USAGE:\tproj2.out <n> <seed> <-arg1> <-arg2> \n"\
                         "ARG1:\t-fo --> 4-byte floating-point, optimized\n"\
                              "\t-fu --> 4-byte floating-point, unoptimized\n"\
                              "\t-xo --> 2-byte fixed-point, optimized\n"\
