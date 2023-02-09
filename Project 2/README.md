@@ -19,8 +19,8 @@ Execute line:
 ./proj2.out <n> <seed> <-arg1> <-arg2>
 ```
 Arguments:<br>
-`<n>`: Size of input and output matrices (integer). The matrices will be of size n-by-n.<br>
-`<seed>`: Randomizer seed (integer). This is a non-negative integer value that controls the internal C randomizer used by the program.<br>
+`<n>`: Size of input and output matrices (positive integer). The matrices will be of size n-by-n.<br>
+`<seed>`: Randomizer seed (positive integer). This specifies the internal C randomizer seed.<br>
 `<-arg1>`: Specifies which data type and instruction set to use.<br>
 &emsp;`-fo` --> 4-byte floating-point data, SIMD instructions<br>
 &emsp;`-fu` --> 4-byte floating-point data, C instructions<br>
