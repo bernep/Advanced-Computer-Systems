@@ -12,7 +12,7 @@ Compile line:
 ```
 gcc proj2.c -o proj2.out -mavx2 -mavx512bw -mavx512vl
 ```
-Assuming you're using relatively modern x86 processor, you should have all of these libraries already. However, if you cannot get your code to compile, then just run the included executable file.
+Assuming you're using relatively modern x86 processor, you should have all of these libraries already. However, if you cannot get your code to compile, then just run the included `proj2.c` executable file.
 
 Execute line:
 ```
