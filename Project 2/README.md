@@ -44,12 +44,11 @@ The `proj2.c` file has plenty of documentation explaining what is happening step
 TBD
 
 ### Hardware Environment
-The CPU used to run this code was an `TBD` with the following specs: <br>
----> `TBD` cores <br>
----> `TBD` threads <br>
----> `TBD` GHz clock <br>
----> `TBD` MB cache <br>
-<br>
+The CPU used to run this code was an Intel® Core™ i7-1165G7 Processor with the following specs: <br>
+---> 4 cores <br>
+---> 8 threads <br> 
+---> 2.8 GHz clock <br>
+---> 12 MB cache <br>
 
 ### Experimental Results
 TBD
@@ -58,4 +57,4 @@ TBD
 TBD
 
 ### Troubleshooting
-This program was run on Ubuntu 22.04 LTS. When trying this code on a Windows 11 laptop, there were execution errors. If you have issues running this code, please contact me (Patrick Berne) over Webex.
+This program was run on a native Ubuntu 22.04 LTS installation. When trying this code on a Windows 11 laptop, there were execution errors. If you have issues running this code, please contact me (Patrick Berne) over Webex.
