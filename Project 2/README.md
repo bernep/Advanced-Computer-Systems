@@ -21,7 +21,7 @@ Execute line:
 Arguments:<br>
 `<n>`: Size of input matrix (integer). This matrix will be of size n-by-n, and the output matrix will be equivalent to the square of input matrix.<br>
 `<seed>`: Randomizer seed (integer). This is a non-negative integer value that controls the internal C randomizer used by the program.<br>
-`<-arg1>`: Specifies which data type and instruction set to use.
+`<-arg1>`: Specifies which data type and instruction set to use.<br>
 &emsp;`-fo` --> 4-byte floating-point data, SIMD instructions<br>
 &emsp;`-fu` --> 4-byte floating-point data, C instructions<br>
 &emsp;`-xo` --> 2-byte fixed-point data, SIMD instructions<br>
