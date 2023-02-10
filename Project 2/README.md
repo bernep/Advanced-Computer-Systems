@@ -64,7 +64,7 @@ Due to the inefficiency of the unoptimized algorithms, they were skipped when ru
 
 ### Analysis and Conclusion
 
-Differences between floating-point and fixed-point calculations seem minor, though they are present. Depending on which algorithm you use, you may floating or fixed point can be faster, so in terms of general performance, the data type isn't particularly significant. <br>
+Differences between floating-point and fixed-point calculations seem minor, though they are present. Depending on which algorithm you use, floating or fixed point can be faster, so in terms of general performance, the data type isn't particularly significant. <br>
 
 The main performance difference comes from the type of algorithm used, and the effect is noticeable with larger datasets. Smaller matrix sizes have a minor effect on performance differences, with the optimized algorithm taking ~94% of the unoptimized algorithm time for 100x100 sized matrices for floating-point values. The performance benefits begin to show drastically for very large matrices. For example, when computing 5000x5000 matrices for fixed-point values, the optimized code only takes 36% as long as the unoptimized algorithm. Likewise, when computing 5000x5000 matrices for floating-point values, the optimized algorithm takes only 27% as long as the unoptimized algorithm. Finally, the unoptimized algorithm was skipped for 10000x10000 matrices due to inefficiency, but we could expect to see the ratio between optimized time versus unoptimized time to become even smaller when scaling up matrix size. <br>
 
