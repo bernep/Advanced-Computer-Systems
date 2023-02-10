@@ -45,7 +45,7 @@ The program begins by taking the input arguments given by the user and interpret
 
 After initializaiton is complete, the code will read the given data-type and algorithm argument (i.e. `-arg1`) and step into one of four paths for matrix computation, as there are four separate matrix computation functions (4-byte floating-point data, optimized multiplication, 4-byte floating-point data, unoptimized multiplication, 2-byte fixed-point data, optimized multiplication, 2-byte fixed-point data, unoptimized multiplication). The matrices are multiplied together, and the output is stored into an output matrix. Afterwards, a memory cleanup is performed and the program ends.
 
-There are also checks for prints throughout the code if the user wishes to read additional information about the matrices (i.e. their contents or the progress in computing said matrices). See the Usage section for more details on how to print data.
+There are also checks for prints throughout the code if the user wishes to read additional information about the matrices (i.e. their contents or the progress in computing said matrices via `-arg2`). See the Usage section for more details on how to print data.
 
 ### Hardware Environment
 The CPU used to run this code was an Intel® Core™ i7-1165G7 Processor with the following specs: <br>
