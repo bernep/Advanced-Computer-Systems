@@ -52,6 +52,8 @@ The CPU used to run this code was an Intel® Core™ i7-1165G7 Processor with th
 
 ### Experimental Results
 
+Data was collected for the purposes of comparing the efficiency of the unoptimized algorithms and the SIMD based optimized algorithms. During the data sampling process, the time taken for a matrix multiplication on both optimized and unoptimized algorithms for both the fixed point and floating point values was taken. When data was collected, the fixed seed 10 was used, and the matrix sizes of 100, 200, 500, 1000, 2000, and 5000 were used. Due to the long length of time, the time taken for the multiplication of 10000 size matrix was only recorded for the optmized algorithms. The results of such experiments can be seen on the graphs below.
+
 Unoptimized Fixed Point
 
 ![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%202/Time%20(Seconds)%20vs.%20Matrix%20Size%20For%20Unoptimized%20Fixed%20Point.png)
