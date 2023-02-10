@@ -51,8 +51,10 @@ The CPU used to run this code was an Intel® Core™ i7-1165G7 Processor with th
 ---> 12 MB cache <br>
 
 ### Experimental Results
-TBD
-
+![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%202/Time (Seconds) vs. Matrix Size for Unoptimized Floating Point.png)
+![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%202/Time (Seconds) vs. Matrix Size for Optimized Floating Point.png)
+![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%202/Time (Seconds) vs. Matrix Size for Unoptimized Fixed Point.png)
+![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%202/Time (Seconds) vs. Matrix Size for Optimized Fixed Point.png)
 ### Analysis and Conclusion
 TBD
 
