@@ -71,7 +71,10 @@ Optimized Floating Point
 ![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%202/Time%20(Seconds)%20vs.%20Matrix%20Size%20For%20Optimized%20Floating%20Point.png)
 
 ### Analysis and Conclusion
-TBD
+
+As we can see on the graphs found above, the optimized algorithms take much less time than the unoptimized algorithms. When comparing the time taken by the matrix multiplication of a 100 size fixed point matrix by the optimized and unoptimized algorithms, the time taken is not much different, with the optimized algorithm taking 94.16681487% of the unoptimized algorithm time. Similarly the improvement found on multiplication of a 100 size floating point matrix by the optimized and unoptimized algorithms is not very large, with the optimized algorithm taking 85.41630454% of the unoptimized algorithm's time. When comparing larger values, we can see that the improvement is very large. For a 5000 size fixed point matrix, when comparing the matrix multiplication time taken by the optimized and unoptimized code, we can see that the optimized code only takes 36.18277219% of the time taken by the unoptimized algorithm. Likewise, when looking at the 5000 size floating point matrix, we can see that the optmized algorithm runtime improvement is very good, with the optmized runtime being 27.31516057% of the original unoptimized algorithm.
+
+In conclusion, we can see that on a large scale, the use of SIMD commands speeds up functions by a large amount.
 
 ### Troubleshooting
 This program was run on a native Ubuntu 22.04 LTS installation. When trying this code on a Windows 11 laptop, there were execution errors. If you have issues running this code, please contact me (Patrick Berne) over Webex.
