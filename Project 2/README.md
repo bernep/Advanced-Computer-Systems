@@ -51,13 +51,22 @@ The CPU used to run this code was an Intel® Core™ i7-1165G7 Processor with th
 ---> 12 MB cache <br>
 
 ### Experimental Results
-![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%202/Time (Seconds) vs. Matrix Size for Unoptimized Floating Point.png)
 
-![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%202/Time (Seconds) vs. Matrix Size for Optimized Floating Point.png)
+Unoptimized Fixed Point
 
-![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%202/Time (Seconds) vs. Matrix Size for Unoptimized Fixed Point.png)
+![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%202/Time%20(Seconds)%20vs.%20Matrix%20Size%20For%20Unoptimized%20Fixed%20Point.png)
 
-![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%202/Time (Seconds) vs. Matrix Size for Optimized Fixed Point.png)
+Optimized Fixed Point
+
+![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%202/Time%20(Seconds)%20vs.%20Matrix%20Size%20for%20Optimized%20Fixed%20Point.png)
+
+Unoptimized Floating Point
+
+![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%202/Time%20(Seconds)%20vs.%20Matrix%20Size%20for%20Unoptimized%20Floating%20Point.png)
+
+Optimized Floating Point
+
+![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%202/Time%20(Seconds)%20vs.%20Matrix%20Size%20For%20Optimized%20Floating%20Point.png)
 
 ### Analysis and Conclusion
 TBD
