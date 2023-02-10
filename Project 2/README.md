@@ -56,29 +56,19 @@ The CPU used to run this code was an Intel® Core™ i7-1165G7 Processor with th
 
 ### Experimental Results
 
-Data was collected for the purposes of comparing the efficiency of the unoptimized algorithms and the SIMD based optimized algorithms. During the data sampling process, the time taken for a matrix multiplication on both optimized and unoptimized algorithms for both the fixed point and floating point values was taken. When data was collected, the fixed seed 10 was used, and the matrix sizes of 100, 200, 500, 1000, 2000, and 5000 were used. Due to the long length of time, the time taken for the multiplication of 10000 size matrix was only recorded for the optmized algorithms. The results of such experiments can be seen on the graphs below.
+Data was collected for the purposes of comparing the efficiency of the unoptimized algorithms and the SIMD based optimized algorithms. During the data sampling process, the time taken for a matrix multiplication on both optimized/unoptimized algorithms and floating/fixed-point values was recorded. When data was collected, the fixed seed 10 was used for randomization, and matrices of size 100x100, 200x200, 500x500, 1000x1000, 2000x2000, and 5000x5000 were computed. <br> <br>
 
-Unoptimized Fixed Point
+Due to the inefficiency of the unoptimized algorithms, they were skipped when running the program on matrices of size 10000x10000.
 
-![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%202/Time%20(Seconds)%20vs.%20Matrix%20Size%20For%20Unoptimized%20Fixed%20Point.png)
-
-Optimized Fixed Point
-
-![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%202/Time%20(Seconds)%20vs.%20Matrix%20Size%20for%20Optimized%20Fixed%20Point.png)
-
-Unoptimized Floating Point
-
-![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%202/Time%20(Seconds)%20vs.%20Matrix%20Size%20for%20Unoptimized%20Floating%20Point.png)
-
-Optimized Floating Point
-
-![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%202/Time%20(Seconds)%20vs.%20Matrix%20Size%20For%20Optimized%20Floating%20Point.png)
+![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%202/results.png)
 
 ### Analysis and Conclusion
 
-As we can see on the graphs found above, the optimized algorithms take much less time than the unoptimized algorithms (although, since we skipped the 10000-size matrix for unoptimized computation, the graphs look somewhat misleading; look closely at the x-axis to see the performance improvements when comparing graphs). When comparing the time taken by the matrix multiplication of a 100 size fixed point matrix by the optimized and unoptimized algorithms, the time taken is not much different, with the optimized algorithm taking ~94% of the unoptimized algorithm time. Similarly the improvement found on multiplication of a 100 size floating point matrix by the optimized and unoptimized algorithms is not very large, with the optimized algorithm taking ~85% of the unoptimized algorithm's time. When comparing larger values, we can see that the improvement is very large. For a 5000 size fixed point matrix, when comparing the matrix multiplication time taken by the optimized and unoptimized code, we can see that the optimized code only takes 36.18277219% of the time taken by the unoptimized algorithm. Likewise, when looking at the 5000 size floating point matrix, we can see that the optmized algorithm runtime improvement is very good, with the optmized runtime being 27.31516057% of the original unoptimized algorithm.
+Differences between floating-point and fixed-point calculations seem minor, though they are present. Depending on which algorithm you use, you may floating or fixed point can be faster, so in terms of general performance, the data type isn't particularly significant. <br> <br>
 
-In conclusion, we can see that on a large scale, the use of SIMD commands speeds up functions by a large amount.
+The main performance difference comes from the type of algorithm used, and the effect is noticeable with larger datasets. Smaller matrix sizes have a minor effect on performance differences, with the optimized algorithm taking ~94% of the unoptimized algorithm time for 100x100 sized matrices for floating-point values. The performance benefits begin to show drastically for very large matrices. For example, when computing 5000x5000 matrices for fixed-point values, the optimized code only takes 36% as long as the unoptimized algorithm. Likewise, when computing 5000x5000 matrices for floating-point values, the optimized algorithm takes only 27% as long as the unoptimized algorithm. Finally, the unoptimized algorithm was skipped for 10000x10000 matrices due to inefficiency, but we could expect to see the ratio between optimized time versus unoptimized time to become even smaller when scaling up matrix size. <br> <br>
+
+In general, SIMD instructions can heavily speed up mathematical operations by optimizing cache access. If we look at a matrix of size 10000x10000 using 4-byte floating point values, that means you have to hold 400MB of data in memory per matrix, which is significantly larger than the 15MB of cache used in experimentation. By optimizing how much data can access that small amount of cache, the performance improvements can be seen drastically for larger input datasets.
 
 ### Troubleshooting
 This program was run on a native Ubuntu 22.04 LTS installation. When trying this code on a Windows 11 laptop, there were execution errors. If you have issues running this code, please contact me (Patrick Berne) over Webex.
