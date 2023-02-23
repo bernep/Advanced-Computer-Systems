@@ -3,34 +3,27 @@
 In this project, we delve into the operating conditions of modern memory and storage devices. Specifically, we want to observe the relationship between data throughput and latency.
 
 ## Testing Environment
-**System:** 
+#### System
 * Framework Laptop
 * WSL2 - Ubuntu 22.04 LTS
 
-**CPU:**
+#### CPU
 * Intel® Core™ i7-1165G7 Processor
   - 4 cores
   - 8 threads
   - 2.8 GHz clock
   - 12 MB cache (L1: 96K, L2: 1.25MB, L3: 12MB)
 
-**Memory**
+#### Memory
 * DDR4 SO-DIMM
 * 3200 MHz
 * 32GB of Memory
 
-**Storage**
+#### Storage
 * Vansuny USB 3.1 Flash Drive
 * 128 GB of Storage
 * 400 MB/s Read Speed
 * 240 MB/s Write Speed
-
-
-#### CPU:
-
-#### Memory:
-
-#### Storage:
 
 In this project, we delve into the operating conditions of modern memory and storage devices. Specifically, we want to observe the relationship between data throughput and latency.
 
