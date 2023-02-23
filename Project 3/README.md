@@ -2,18 +2,26 @@
 ## Overview
 TBD
 
-## Testing Procedure
+## Memory
+### Testing Procedure
 TBD
 
-## Results: Memory
+### Results
 The following results were obtained using `32GB` of `DDR4-3200 RAM`. <br> <br>
 ![](./lram64.png)
 ![](./bram64.png)
 ![](./lram256.png)
 ![](./bram256.png)
 
-## Results: SSD
-The following results were obtained on a ---> `TBD` <--- using an IO Depth of `16`. <br>
+### Analysis
+TBD
+
+## Storage
+### Testing Procedure
+TBD
+
+### Results
+The following results were obtained on a `Vansuny USB 3.1 Flash Drive` with `128 GB` of storage using an IO Depth of `16`. It should be noted that this flash drive in particular reports to have `400M B/s` and `240 MB/s` read and write speeds, respectively, which is a fairly standard SSD read/write speed (as of the writing of this, i.e. Feb. 2023). <br>
 
 | Test Type          | Block Size (KB) | IOPS Average | Bandwidth Average (MB/s) | Latency Average (u-sec) |
 |--------------------|------------|--------------|--------------------------|-------------------------|
@@ -27,7 +35,7 @@ The following results were obtained on a ---> `TBD` <--- using an IO Depth of `1
 100% Write | 32 | 44236 | 1424 | 353.25
 100% Write | 128 | 11342 | 1438 | 1399
 
-## Analysis
+### Analysis
 TBD
 
 ## Conclusion
