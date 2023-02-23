@@ -3,7 +3,7 @@
 TBD
 
 ## Results: Memory
-The following results were obtained using `32GB` of `DDR4-3200 RAM`. <br>
+The following results were obtained using `32GB` of `DDR4-3200 RAM`. <br> <br>
 ![](./lram64.png)
 ![](./bram64.png)
 ![](./lram256.png)
