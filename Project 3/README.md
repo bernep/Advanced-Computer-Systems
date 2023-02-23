@@ -46,11 +46,11 @@ Using [Intel's Memory Latency Checker](https://www.intel.com/content/www/us/en/d
 ![](./bram256.png)
 
 ### Analysis
-* As the inject delay increases, the bandwidth decreases for all configurations, which is expected since a larger inject delay leads to more time spent waiting for the data to be retrieved, resulting in lower bandwidth.
-* Low inject delays have a very large bandwidth but also a very large latency, meaning that the system can process data quickly, but it also has to wait a significantly longer amount of time to obtain new data, so in regards to queuing theory, the ratio of bandwidth to latency here is not ideal for optimal performance.
-* Increasing the injection rate and ultimately has diminishing returns on reducing latency, since all read/write configurations generally end up having the same plateued latency at high injection levels. Bandwidth, however, continues to decrease significantly as the injection rate increases for all read/write configurations.
+* As the inject delay increases, the bandwidth decreases for all configurations, which is expected since a larger inject delay leads to more time spent waiting for the data to be retrieved, thus resulting in lower bandwidth.
+* Low inject delays have a very large bandwidth but also a very large latency, meaning that the system can process data quickly, but it also has to wait significantly longer to obtain new data. In regards to queuing theory, the ratio of bandwidth to latency here is not ideal for optimal performance.
+* Increasing the injection rate ultimately has diminishing returns on reducing latency, since all read/write configurations generally end up having the same plateued latency at high injection levels. Bandwidth, however, continues to decrease significantly as the injection rate increases for all read/write configurations.
 * Adjusting the access size doesn't have an extraordinary effect on performance, although the main difference seems to be an increase in latency when increasing access size. Lower access sizes also seem to favor reading configurations more while higher access sizes seem to favor writing configurations more.
-* The most optimal results seem to come from a mixture of read/write and a moderate injection delay for both access sizes, which generally makes sense since queuing theory indicates that a balance should be made between bandwidth and latency in order to achieve the optimal results.
+* The most optimal results seem to come from a mixture of read/write and a moderate injection delay for both access sizes, which generally makes sense since queuing theory indicates that a balance should be made between bandwidth and latency.
 
 
 
