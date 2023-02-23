@@ -2,9 +2,12 @@
 ## Overview
 In this project, we delve into the operating conditions of modern memory and storage devices. Specifically, we will observe the relationship between data throughput and latency using [Intel's Memory Latency Checker](https://www.intel.com/content/www/us/en/developer/articles/tool/intelr-memory-latency-checker.html) for memory, and the [Flexible IO Tester](https://github.com/axboe/fio) library for storage.
 
+<br> <br> <br>
+## Queuing Theory
+TBD
 
 
-
+<br> <br> <br>
 ## Testing Environment
 #### System
 * Framework Laptop
@@ -19,7 +22,7 @@ In this project, we delve into the operating conditions of modern memory and sto
   
   
   
-
+<br> <br> <br>
 #### Memory
 * DDR4 SO-DIMM
 * 3200 MHz
@@ -32,11 +35,8 @@ In this project, we delve into the operating conditions of modern memory and sto
 * 240 MB/s Write Speed
 
 ## Memory
-### Testing Procedure and Context
-TBD
-
-
-
+### Testing Procedure
+Using [Intel's Memory Latency Checker](https://www.intel.com/content/www/us/en/developer/articles/tool/intelr-memory-latency-checker.html), we ran different configurations
 
 ### Results
 ![](./lram64.png)
@@ -47,6 +47,10 @@ TBD
 ### Analysis
 TBD
 
+
+
+
+<br> <br> <br>
 ## Storage
 ### Testing Procedure and Context
 TBD
@@ -74,6 +78,6 @@ TBD
 TBD
 
 
-
+<br> <br> <br>
 ## Conclusion
 TBD
