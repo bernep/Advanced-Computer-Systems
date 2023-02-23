@@ -37,7 +37,7 @@ TBD
 
 ## Memory
 ### Testing Procedure
-Using [Intel's Memory Latency Checker](https://www.intel.com/content/www/us/en/developer/articles/tool/intelr-memory-latency-checker.html), we ran different configurations for read/write ratios and data access sizes.
+Using [Intel's Memory Latency Checker](https://www.intel.com/content/www/us/en/developer/articles/tool/intelr-memory-latency-checker.html), we ran different configurations for read/write ratios and data access sizes. Specifically, the read/write ratios determined the number of data reads versus non-temporal writes.
 
 ### Results
 ![](./lram64.png)
