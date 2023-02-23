@@ -2,8 +2,15 @@
 ### Overview
 TBD
 
+### Results: Memory
+The following results were obtained using 32GB of DDR4-3200 RAM.
+![](./lram64.png)
+![](./bram64.png)
+![](./lram256.png)
+![](./bram256.png)
+
 ### Results: SSD
-The following results were obtained on a <TBD> using an IO Depth of 16.
+The following results were obtained on a ---> TBD <--- using an IO Depth of 16.
 
 | Test Type          | Block Size (KB) | IOPS Average | Bandwidth Average (MB/s) | Latency Average (u-sec) |
 |--------------------|------------|--------------|--------------------------|-------------------------|
