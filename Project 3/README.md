@@ -37,7 +37,7 @@ TBD
 
 ## Memory
 ### Testing Procedure
-Using [Intel's Memory Latency Checker](https://www.intel.com/content/www/us/en/developer/articles/tool/intelr-memory-latency-checker.html), we ran different configurations
+Using [Intel's Memory Latency Checker](https://www.intel.com/content/www/us/en/developer/articles/tool/intelr-memory-latency-checker.html), we ran different configurations for read/write ratios and data access sizes.
 
 ### Results
 ![](./lram64.png)
