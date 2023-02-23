@@ -31,7 +31,7 @@ TBD
 
 
 
-<br>
+
 ## Memory
 ### Testing Procedure
 Using [Intel's Memory Latency Checker](https://www.intel.com/content/www/us/en/developer/articles/tool/intelr-memory-latency-checker.html), we ran different configurations
@@ -48,7 +48,6 @@ TBD
 
 
 
-<br>
 ## Storage
 ### Testing Procedure and Context
 TBD
@@ -76,6 +75,7 @@ TBD
 TBD
 
 
-<br>
+
+
 ## Conclusion
 TBD
