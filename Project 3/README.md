@@ -1,16 +1,16 @@
-## Project 3: Memory and Storage Performance Profiling
-### Overview
+# Project 3: Memory and Storage Performance Profiling
+## Overview
 TBD
 
-### Results: Memory
-The following results were obtained using 32GB of DDR4-3200 RAM.
+## Results: Memory
+The following results were obtained using `32GB` of `DDR4-3200 RAM`. <br>
 ![](./lram64.png)
 ![](./bram64.png)
 ![](./lram256.png)
 ![](./bram256.png)
 
-### Results: SSD
-The following results were obtained on a ---> TBD <--- using an IO Depth of 16.
+## Results: SSD
+The following results were obtained on a ---> `TBD` <--- using an IO Depth of `16`. <br>
 
 | Test Type          | Block Size (KB) | IOPS Average | Bandwidth Average (MB/s) | Latency Average (u-sec) |
 |--------------------|------------|--------------|--------------------------|-------------------------|
