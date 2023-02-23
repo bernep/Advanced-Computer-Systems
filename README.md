@@ -10,5 +10,5 @@ This project showcases the performance differences between standard C instructio
 ---> [Project 2 - Matrix-Matrix Multiplication with SIMD Instructions & Cache Miss Minimization](https://github.com/bernep/Advanced-Computer-Systems/tree/main/Project%202)
 
 ## Project 3: Memory and Storage Performance Profiling
-TBD <br>
+In this project, we delve into the operating conditions of modern memory and storage devices. Specifically, we will observe the relationship between data access throughput and latency. <br>
 ---> [Project 3 - Memory and Storage Performance Profiling](https://github.com/bernep/Advanced-Computer-Systems/tree/main/Project%203)
