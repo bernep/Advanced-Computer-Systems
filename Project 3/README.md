@@ -1,6 +1,6 @@
 # Project 3: Memory and Storage Performance Profiling
 ## Overview
-In this project, we delve into the operating conditions of modern memory and storage devices. Specifically, we want to observe the relationship between data throughput and latency.
+In this project, we delve into the operating conditions of modern memory and storage devices. Specifically, we will observe the relationship between data throughput and latency using [Intel's Memory Latency Checker](https://www.intel.com/content/www/us/en/developer/articles/tool/intelr-memory-latency-checker.html) for memory, and the [Flexible IO Tester](https://github.com/axboe/fio) library for storage.
 
 ## Testing Environment
 #### System
