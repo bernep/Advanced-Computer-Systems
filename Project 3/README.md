@@ -57,11 +57,9 @@ Using [Intel's Memory Latency Checker](https://www.intel.com/content/www/us/en/d
 
 ## Storage
 ### Testing Procedure and Context
-TBD
+Using [Flexible IO Tester](https://github.com/axboe/fio) on an external flash drive, we ran different configurations for read/write ratios and data access sizes. Additionally, an IO Depth of `16` was used. It should be noted that this flash drive in particular reports to have `400M B/s` and `240 MB/s` read and write speeds, respectively, which is a fairly standard SSD read/write speed (as of the writing of this, i.e. Feb. 2023). <br>
 
 ### Results
-The following results were obtained on a `Vansuny USB 3.1 Flash Drive` with `128 GB` of storage using an IO Depth of `16`. It should be noted that this flash drive in particular reports to have `400M B/s` and `240 MB/s` read and write speeds, respectively, which is a fairly standard SSD read/write speed (as of the writing of this, i.e. Feb. 2023). <br>
-
 | Test Type          | Block Size (KB) | IOPS Average | Bandwidth Average (MB/s) | Latency Average (u-sec) |
 |--------------------|------------|--------------|--------------------------|-------------------------|
 100% Read	| 4	| 275940	| 1056	| 59.8
@@ -76,13 +74,14 @@ The following results were obtained on a `Vansuny USB 3.1 Flash Drive` with `128
 
 ### Analysis
 #### General Analysis
-TBD
+* In general, when the data access size increases, the IOPS (Input/Output Operations Per Second) decreases while the bandwidth and latency increase. This is because larger block sizes allow for more data to be transferred with each I/O operation, but the amount of time it takes to access and process the larger data blocks also goes up. 
+* Adjusting the read/write ratio does not seem to have a major effect on any of the performance metrics, which is odd since the SSD manufacturer reports 240MB/s write versus a 400MB/s read. You would think that the reading configurations would have higher bandwidth and lower latency, but the results are similar.
+* It should be noted that only one IO depth (i.e. `16`) was shown here, but in general, increasing IO depth results in higher throughput (bandwidth), but increased latency.
+* The trade-off between bandwidth and latency is quite obvious here with data access size, as that is the main factor for performance. Depending on your system, you should adjust this variable to increase/decrease bandwidth/latency.
 
 #### Comparison to Intel Enterprise-Grade SSD
-TBD
-
-
+We've been asked to compare our client-grade SSD (128GB) to Intel's entrerprise-grade Data Center NVMe SSD D7-P5600 (1.6TB). Intel's SSD reports a random write-only IOPS of 130K for 4KB access blocks. Our SSD reports 262K IOPS for the same test, which initially seems odd, since you would expect an enterprise-grade SSDs to have a larger IOPS. However, its makes sense when you consider that enterprise-grade SSDs are designed for specific uses. In this case, the enterprise-grade SSD has a reading IOPS of up to 1M, meaning that it's specifically optimized for reading data, whereas my SSD is optimized for general usage (reading and writing).
 
 
 ## Conclusion
-TBD
+....something something queuing theory and bandwidth/latency (TBD)
