@@ -1,14 +1,12 @@
 # Project 3: Memory and Storage Performance Profiling
 ## Overview
+### Introduction
 In this project, we delve into the operating conditions of modern memory and storage devices. Specifically, we will observe the relationship between data throughput and latency using [Intel's Memory Latency Checker](https://www.intel.com/content/www/us/en/developer/articles/tool/intelr-memory-latency-checker.html) for memory, and the [Flexible IO Tester](https://github.com/axboe/fio) library for storage.
 
-<br> <br> <br>
-## Queuing Theory
+### Queuing Theory
 TBD
 
-
-<br> <br> <br>
-## Testing Environment
+### Testing Environment
 #### System
 * Framework Laptop
 * WSL2 - Ubuntu 22.04 LTS
@@ -22,7 +20,7 @@ TBD
   
   
   
-<br> <br> <br>
+<br> <br>
 #### Memory
 * DDR4 SO-DIMM
 * 3200 MHz
@@ -50,7 +48,7 @@ TBD
 
 
 
-<br> <br> <br>
+<br> <br>
 ## Storage
 ### Testing Procedure and Context
 TBD
@@ -78,6 +76,6 @@ TBD
 TBD
 
 
-<br> <br> <br>
+<br> <br>
 ## Conclusion
 TBD
