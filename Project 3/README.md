@@ -18,9 +18,6 @@ TBD
   - 2.8 GHz clock
   - 12 MB cache (L1: 96K, L2: 1.25MB, L3: 12MB)
   
-  
-  
-<br> <br>
 #### Memory
 * DDR4 SO-DIMM
 * 3200 MHz
@@ -32,6 +29,9 @@ TBD
 * 400 MB/s Read Speed
 * 240 MB/s Write Speed
 
+
+
+<br>
 ## Memory
 ### Testing Procedure
 Using [Intel's Memory Latency Checker](https://www.intel.com/content/www/us/en/developer/articles/tool/intelr-memory-latency-checker.html), we ran different configurations
@@ -48,7 +48,7 @@ TBD
 
 
 
-<br> <br>
+<br>
 ## Storage
 ### Testing Procedure and Context
 TBD
@@ -76,6 +76,6 @@ TBD
 TBD
 
 
-<br> <br>
+<br>
 ## Conclusion
 TBD
