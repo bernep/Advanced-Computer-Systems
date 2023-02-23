@@ -1,6 +1,6 @@
 ## Project 2: Matrix-Matrix Multiplication with SIMD Instructions & Cache Miss Minimization
 ### Overview
-This project showcases the performance differences between standard C instructions and [Intel's intrinsic SIMD x86 library](https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html).
+This project showcases the performance differences between standard C instructions and [Intel's intrinsic SIMD x86 library](https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html) when multiplying two `n`-by-`n` matrices together.
 
 ### Usage
 Open a command terminal in a directory containing the `proj2.c` file, and use the commands below to compile and run the code.
