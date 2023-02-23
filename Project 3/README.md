@@ -2,6 +2,9 @@
 ## Overview
 TBD
 
+## Testing Procedure
+TBD
+
 ## Results: Memory
 The following results were obtained using `32GB` of `DDR4-3200 RAM`. <br> <br>
 ![](./lram64.png)
@@ -23,3 +26,9 @@ The following results were obtained on a ---> `TBD` <--- using an IO Depth of `1
 100% Write | 4 | 262143 | 1048 | 59.97
 100% Write | 32 | 44236 | 1424 | 353.25
 100% Write | 128 | 11342 | 1438 | 1399
+
+## Analysis
+TBD
+
+## Conclusion
+TBD
