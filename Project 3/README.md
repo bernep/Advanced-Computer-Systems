@@ -84,4 +84,4 @@ We've been asked to compare our client-grade SSD (128GB) to Intel's entrerprise-
 
 
 ## Conclusion
-In both cases for memory and storage, the optimal speed for each system was achieved when compromosing between bandwidth and latency, which is expected in queuing theory. There are a lot of specifics when it comes to changing read/write speed and data access sizes, but in general, only prioirtiizng one parameters usually did not lead to an optimal outcome.
+In both cases for memory and storage, the optimal speed for each system was achieved when compromosing between bandwidth and latency, which is expected in queuing theory. There are a lot of specifics when it comes to changing read/write speed and data access sizes, but in general, only prioirtiizng one parameter usually did not lead to an optimal outcome.
