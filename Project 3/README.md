@@ -4,7 +4,7 @@
 In this project, we delve into the operating conditions of modern memory and storage devices. Specifically, we will observe the relationship between data throughput and latency using [Intel's Memory Latency Checker](https://www.intel.com/content/www/us/en/developer/articles/tool/intelr-memory-latency-checker.html) for memory, and the [Flexible IO Tester](https://github.com/axboe/fio) library for storage.
 
 ### Queuing Theory
-TBD
+Queuing theory essentially refers to the mathematics of waiting lines. There are two main concepts to consider in the case of compute memory/storage: bandwidth and latency. If you were to relate this to a real-life scenario, latency would be equivalent to the amount of time people wait in a line (e.g. waiting in an amusement park line), while bandwidth refers to how long it takes for the people to do the thing they're waiting for (e.g. how long it takes to ride an amusement park ride). In order to maximize the speed you get from a queuing process, you need to optimize both of these parameters. In this project, we look for configurations to optimize speed by finding a good trade-off between bandwidth and latency.
 
 
 
@@ -84,4 +84,4 @@ We've been asked to compare our client-grade SSD (128GB) to Intel's entrerprise-
 
 
 ## Conclusion
-....something something queuing theory and bandwidth/latency (TBD)
+In both cases for memory and storage, the optimal speed for each system was achieved when compromosing between bandwidth and latency, which is expected in queuing theory. There are a lot of specifics when it comes to changing read/write speed and data access sizes, but in general, only prioirtiizng one parameters usually did not lead to an optimal outcome.
