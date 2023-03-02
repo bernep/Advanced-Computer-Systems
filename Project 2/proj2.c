@@ -1,4 +1,4 @@
-/* proj1.c */
+/* proj2.c */
 /* Patrick Berne, Andre Shibata */
 
 // Example Compile Line: "gcc proj2.c -o proj2.out -mavx2 -mavx512bw -mavx512vl"
