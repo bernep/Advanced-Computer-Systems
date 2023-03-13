@@ -12,6 +12,29 @@
 #include <immintrin.h>
 #include <pthread.h>
 #include <time.h>
+#include "uthash.h"
+
+
+unsigned long hashdb(unsigned char *str)
+{
+    unsigned long hash = 5381;
+    int c;
+
+    while (c = *str++)
+        hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+
+    return hash;
+}
+
+
+// Define struct for the Hash Table
+typedef struct mytable {
+    int id;            /* we'll use this field as the key */
+    char name[10];
+    UT_hash_handle hh; /* makes this structure hashable */
+} mytable;
+
+mytable *user, *users=NULL;
 
 // Define struct for thread data
 struct ThreadPacket {
@@ -29,15 +52,21 @@ void *dictionary_encode(void* thread_data) {
     // Grab thread data, turn into more readable format
     struct ThreadPacket* tp = thread_data;
     
+    char* numb = tp->data;
     // TBD
-    int key = 0; // TBD
+    int key = hashdb(numb);
+
+    user = (mytable*)malloc(sizeof(mytable));
+    user->id = key;
+    user->name = numb;
+    HASH_ADD_INT(users,id,user);
 
     // Write dictionary and encoded column to output file with mutex locking
     pthread_mutex_lock(&file_mut);
-    fprintf(tp->output_file, "%d\t%s\n", key, tp->data);
+    fprintf(tp->output_file, "%d\t%s\n", key, numb);
     fflush(tp->output_file);
     pthread_mutex_unlock(&file_mut);
-
+    
     // End thread
     pthread_exit(NULL);
 }
