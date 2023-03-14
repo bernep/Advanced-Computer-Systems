@@ -16,13 +16,13 @@
 
 // Define struct for thread data
 struct ThreadPacket {
-    ushort key;
+    uint key;
     char* data;
 };
 
 // Global variables
 struct TreeNode* TREE_ROOT = NULL;
-ushort ENCODED_VALUE = 1;
+uint ENCODED_VALUE = 1;
 
 // Function: Dictionary encoder as a worker thread; also populate binary tree
 void *dictionary_encode(void* thread_data) {
@@ -176,7 +176,7 @@ int main(int argc, char* argv[]) {
 	
 	// The binary tree is set up correctly. Basically, you can look up values like this:
 	char* search_term = "fabzighnd";
-	ushort encoded_val = tree_search(search_term, TREE_ROOT, (TreeCompare)tree_cmp_str);
+	uint encoded_val = tree_search(search_term, TREE_ROOT, (TreeCompare)tree_cmp_str);
 	
 	// If encoded_val is 0, then the string does not exist in the tree
 	if (encoded_val == 0) {

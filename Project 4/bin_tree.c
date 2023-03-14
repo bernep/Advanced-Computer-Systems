@@ -7,7 +7,7 @@
 #include "bin_tree.h"
 
 // Function: Insert elements into B-tree
-int tree_insert(char* key, ushort encoded_val, struct TreeNode** leaf, TreeCompare cmp) {
+int tree_insert(char* key, uint encoded_val, struct TreeNode** leaf, TreeCompare cmp) {
     int res;
     if( *leaf == NULL ) {
         *leaf = (struct TreeNode*) malloc( sizeof( struct TreeNode ) );
@@ -44,7 +44,7 @@ void tree_print(struct TreeNode* root) {
 }
 
 // Function: Search tree for specified element
-ushort tree_search(char* key, struct TreeNode* leaf, TreeCompare cmp)  {
+uint tree_search(char* key, struct TreeNode* leaf, TreeCompare cmp)  {
     int res;
     if( leaf != NULL ) {
         res = cmp(key, leaf->value);
