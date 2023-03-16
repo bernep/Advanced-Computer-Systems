@@ -9,7 +9,7 @@ you can end up with a file that takes up less space, and data is easier to scan 
 Encoding is done through the use of a binary tree and multiple worker threads. When data is read from the input file, it is continously
 passed to a worker thread. In these worker threads, values are assigned a code (initially 1, and it increases for each unique string)
 and these valuse, along with their codes, are placed into the binary tree. The benefit of multithreading in this case is populating and 
-searching the binary tree when encoding. Whenver a value is passed to a worker thread, the value is inserted into the binary tree
+searching the binary tree when encoding. Whenever a value is passed to a worker thread, the value is inserted into the binary tree
 (and accepted if it's unique, otherwise it's rejected), and it is successfully inserted, it is assigned a unique encoded value. By
 using multiple threads, we can speedup how quickly we process input data into the binary tree and thus how quickly we can encode
 data. After the thread finishes executing, it is written to the output file in the order it was originally read in.
