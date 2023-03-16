@@ -6,7 +6,7 @@
 // Import Libraries
 #include "bin_tree.h"
 
-// Function: Insert elements into B-tree
+// Function: Insert elements into binary tree
 int tree_insert(char* key, uint encoded_val, struct TreeNode** leaf, TreeCompare cmp) {
     int res;
     if( *leaf == NULL ) {
