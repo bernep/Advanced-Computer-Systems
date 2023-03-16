@@ -24,3 +24,4 @@ int tree_cmp_str(const char* a, const char* b);
 void tree_print(struct TreeNode* root);
 uint tree_search(char* key, struct TreeNode* leaf, TreeCompare cmp);
 void tree_delete(struct TreeNode** leaf);
+char* tree_prefix_lookup(struct TreeNode* node, const char* value);

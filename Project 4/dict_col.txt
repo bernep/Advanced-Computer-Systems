@@ -1,9 +1,9 @@
 1	pikgyaqet
 2	pazayouzlg
 3	kszvdc
-5	rzjtuj
-4	ormwjjwjic
-6	gtkhqcn
+4	rzjtuj
+6	ormwjjwjic
+5	gtkhqcn
 7	nsmgpo
 8	byasa
 9	wqjuumi
@@ -14,11 +14,11 @@
 14	thsgtyw
 15	mpkpcp
 1	pikgyaqet
-1	pazayouzlg
+2	pazayouzlg
 3	kszvdc
 4	rzjtuj
-4	ormwjjwjic
-6	gtkhqcn
+6	ormwjjwjic
+5	gtkhqcn
 7	nsmgpo
 8	byasa
 9	wqjuumi
