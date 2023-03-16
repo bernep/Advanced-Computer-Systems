@@ -192,7 +192,15 @@ int main(int argc, char* argv[]) {
     // ----> TREE PRINT (FOR DEBUGGING)
     printf("\nBINARY TREE VALUES (in order):\n");
     tree_print(TREE_ROOT);
-
+    for(int i = 1; i<10;i++){
+        char int_str[1];
+        sprintf(int_str, "%d", i);
+        printf("\n");
+        printf("The Lookup for index %d is :\n", i);
+        printf(tree_prefix_lookup(TREE_ROOT,int_str));
+        printf("\n");
+        printf("_________________\n");
+    }
     /* =============================================================== */
     /* === END PROGRAM === */
     

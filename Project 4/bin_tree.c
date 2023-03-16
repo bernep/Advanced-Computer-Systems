@@ -6,7 +6,7 @@
 // Import Libraries
 #include "bin_tree.h"
 
-// Function: Insert elements into binary tree
+// Function: Insert elements into B-tree
 int tree_insert(char* key, uint encoded_val, struct TreeNode** leaf, TreeCompare cmp) {
     int res;
     if( *leaf == NULL ) {
@@ -67,4 +67,22 @@ void tree_delete(struct TreeNode** leaf) {
         free( (*leaf)->value );
         free( (*leaf) );
     }
+}
+// Function: Return the Value based on the encoded value
+char* tree_prefix_lookup(struct TreeNode* root, const char* value){
+    if( root != NULL ) {
+        if(atoi(value) == root->encoded_value){
+            return(root->value);
+        }
+        char* leftRes = tree_prefix_lookup(root->p_left,value);
+        char* rightRes = tree_prefix_lookup(root->p_right,value);
+        if(sizeof(leftRes)>0){
+            return leftRes;
+        }if(sizeof(rightRes)>0){
+            return rightRes;
+        }
+        return "";
+    }
+    return "";
+    
 }
