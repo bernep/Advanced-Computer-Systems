@@ -8,27 +8,39 @@
 #include "bin_tree.h"
 
 // Function: Insert elements into binary tree
-int tree_insert(char* key, uint encoded_val, struct TreeNode** leaf) {
+uint tree_insert(char* key, uint index, uint encoded_val, struct TreeNode** leaf) {
     int res;
+    // Insert unique element into tree if node is available and initialize all its values
     if( *leaf == NULL ) {
-        *leaf = (struct TreeNode*) malloc( sizeof( struct TreeNode ) );
-        (*leaf)->value = malloc( strlen (key) + 1);
+        *leaf = (struct TreeNode*)malloc(sizeof(struct TreeNode));
+        (*leaf)->value = malloc(strlen (key) + 1);
         strcpy ((*leaf)->value, key);
         (*leaf)->encoded_value = encoded_val;
-        (*leaf)->num_children = 0;
+        (*leaf)->indices = (struct ListNode*)malloc(sizeof(struct ListNode));
+        (*leaf)->indices->index = index;
+        (*leaf)->indices->next = NULL;  // Initialize the next pointer to NULL
         (*leaf)->p_left = NULL;
         (*leaf)->p_right = NULL;
-    } else {
+    }
+    // Otherwise, continue searching or modify duplicate entries
+    else {
         res = strcmp(key, (*leaf)->value);
         if(res < 0) {
-            (*leaf)->num_children++;
-            return tree_insert(key, encoded_val, &(*leaf)->p_left);
+            return tree_insert(key, index, encoded_val, &(*leaf)->p_left);
         } else if(res > 0) {
-            (*leaf)->num_children++;
-            return tree_insert(key, encoded_val, &(*leaf)->p_right);
+            return tree_insert(key, index, encoded_val, &(*leaf)->p_right);
         } else {
+            // Add entry index to list
+            struct ListNode* ptr = (*leaf)->indices;
+            while (ptr->next != NULL) {
+                ptr = ptr->next;
+            }
+            ptr->next = (struct ListNode*)malloc(sizeof(struct ListNode));
+            ptr->next->index = index;
+            ptr->next->next = NULL;
             return 1;  // indicate duplicate entry
         }
+
     }
     return 0;  // indicate unique entry
 }
@@ -85,12 +97,42 @@ void tree_prefix_search(const char* prefix, uint* codes,
     }  
 }
 
+// Function: Get pointer to dictionary entry's listed indices
+struct ListNode* tree_get_indices(uint code, struct TreeNode* leaf) {
+    if( leaf != NULL ) {
+        if (code == leaf->encoded_value) {
+            return leaf->indices;
+        } else {
+            struct ListNode* left_result = tree_get_indices(code, leaf->p_left);
+            if (left_result != NULL) {
+                return left_result;
+            }
+            return tree_get_indices(code, leaf->p_right);
+        }
+    }
+    return NULL;
+}
+
+
 // Function: Delete tree
 void tree_delete(struct TreeNode** leaf) {
-    if( *leaf != NULL ) {
+    if (*leaf != NULL) {
+        // Recursion
         tree_delete(&(*leaf)->p_left);
         tree_delete(&(*leaf)->p_right);
-        free( (*leaf)->value );
-        free( (*leaf) );
+
+        // Delete ListNode entries
+        struct ListNode* current = (*leaf)->indices;
+        struct ListNode* temp;
+        while (current != NULL) {
+            temp = current->next;
+            free(current);
+            current = temp;
+        }
+
+        // Delete TreeNode
+        free((*leaf)->value);
+        free(*leaf);
     }
 }
+
