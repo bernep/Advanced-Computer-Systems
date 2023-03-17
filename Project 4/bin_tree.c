@@ -1,37 +1,36 @@
 /* bin_tree.c */
 
-/* This code was initially taken from https://stackoverflow.com/questions/26874194/binary-tree-for-strings-c */
+/* This code was initially taken from:
+   https://stackoverflow.com/questions/26874194/binary-tree-for-strings-c */
 /* The code has been modified and re-formatted to suit the purposes of this project */
 
 // Import Libraries
 #include "bin_tree.h"
 
-// Function: Insert elements into B-tree
-int tree_insert(char* key, uint encoded_val, struct TreeNode** leaf, TreeCompare cmp) {
+// Function: Insert elements into binary tree
+int tree_insert(char* key, uint encoded_val, struct TreeNode** leaf) {
     int res;
     if( *leaf == NULL ) {
         *leaf = (struct TreeNode*) malloc( sizeof( struct TreeNode ) );
-        (*leaf)->value = malloc( strlen (key) + 1);     // memory for key
-        strcpy ((*leaf)->value, key);                   // copy the key
-        (*leaf)->encoded_value = encoded_val;           // assign encoded value to node
+        (*leaf)->value = malloc( strlen (key) + 1);
+        strcpy ((*leaf)->value, key);
+        (*leaf)->encoded_value = encoded_val;
+        (*leaf)->num_children = 0;
         (*leaf)->p_left = NULL;
         (*leaf)->p_right = NULL;
     } else {
-        res = cmp (key, (*leaf)->value);
+        res = strcmp(key, (*leaf)->value);
         if(res < 0) {
-            return tree_insert(key, encoded_val, &(*leaf)->p_left, cmp);
+            (*leaf)->num_children++;
+            return tree_insert(key, encoded_val, &(*leaf)->p_left);
         } else if(res > 0) {
-            return tree_insert(key, encoded_val, &(*leaf)->p_right, cmp);
-        } else {                                        // key already exists
+            (*leaf)->num_children++;
+            return tree_insert(key, encoded_val, &(*leaf)->p_right);
+        } else {
             return 1;  // indicate duplicate entry
         }
     }
     return 0;  // indicate unique entry
-}
-
-// Function: Compare value of the new node against previous node
-int tree_cmp_str(const char* a, const char* b) {
-    return (strcmp (a, b));
 }
 
 // Function: Recursively print out the tree inorder
@@ -43,20 +42,47 @@ void tree_print(struct TreeNode* root) {
     }
 }
 
-// Function: Search tree for specified element
-uint tree_search(char* key, struct TreeNode* leaf, TreeCompare cmp)  {
+// Function: Search tree for encoded value based on string search term
+uint tree_str_search(char* key, struct TreeNode* leaf) {
     int res;
     if( leaf != NULL ) {
-        res = cmp(key, leaf->value);
+        res = strcmp(key, leaf->value);
         if( res < 0) {
-            return tree_search(key, leaf->p_left, cmp);
+            return tree_str_search(key, leaf->p_left);
         } else if( res > 0) {
-            return tree_search(key, leaf->p_right, cmp);
+            return tree_str_search(key, leaf->p_right);
         } else {
-            return leaf->encoded_value;	 // return value encoded value
-	}
+            return leaf->encoded_value;	 // return encoded value
+	    }
     }
     return 0;  // return invalid encoded value
+}
+
+// Function: Search tree for string based on code search term
+// ---> Note: This function stores the resulting string in str_res
+void tree_code_search(uint code, char* str_res, struct TreeNode* leaf) {
+    if( leaf != NULL ) {
+        if (code == leaf->encoded_value) {
+            strcpy(str_res, leaf->value); // copy string to result buffer
+        } else {
+            tree_code_search(code, str_res, leaf->p_left);
+            tree_code_search(code, str_res, leaf->p_right);
+        }
+    }
+}
+
+// Function: Search tree for strings whose prefix matches the search term
+// ---> Note: This function stores the resulting codes in the codes[] array
+void tree_prefix_search(const char* prefix, uint* codes,
+                        size_t* codes_size, struct TreeNode* leaf) {
+    if( leaf != NULL ) {
+        if (strncmp(leaf->value, prefix, strlen(prefix)) == 0) {
+            codes[*codes_size] = leaf->encoded_value;
+            (*codes_size)++;
+        }
+        tree_prefix_search(prefix, codes, codes_size, leaf->p_left);
+        tree_prefix_search(prefix, codes, codes_size, leaf->p_right);
+    }  
 }
 
 // Function: Delete tree
@@ -67,22 +93,4 @@ void tree_delete(struct TreeNode** leaf) {
         free( (*leaf)->value );
         free( (*leaf) );
     }
-}
-// Function: Return the Value based on the encoded value
-char* tree_prefix_lookup(struct TreeNode* root, const char* value){
-    if( root != NULL ) {
-        if(atoi(value) == root->encoded_value){
-            return(root->value);
-        }
-        char* leftRes = tree_prefix_lookup(root->p_left,value);
-        char* rightRes = tree_prefix_lookup(root->p_right,value);
-        if(sizeof(leftRes)>0){
-            return leftRes;
-        }if(sizeof(rightRes)>0){
-            return rightRes;
-        }
-        return "";
-    }
-    return "";
-    
 }
