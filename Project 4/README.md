@@ -30,18 +30,19 @@ If you cannot get your code to compile, then just run the included `proj4.out` e
 
 Execute line:
 ```
-./proj4.out <input_file> <num_threads> <query_print_enable>
+./proj4.out <input_file> <num_threads> <ssd_write_enable> <query_print_enable>
 ```
 Arguments:<br>
 `<input_file>`: The name of your input file, e.g. `col.txt`<br>
 `<num_threads>`: The number of worker threads you would like to run for encoding.<br>
-`<query_print_enable>`: Set this to '1' if you would like to enable index printing of your lookup strings, or `0` otherwise. <br>
-&emsp;`-fo` Note: `query_print_enable` should be disabled when doing performance comparisons since it significantly
-                  affects the program execution time.<br>
+`<ssd_write_enable>`: Set this to `1` if you do not want to write data to the SSD. <br>
+&emsp;`-fo` Note: `ssd_write_enable` should be only disabled when doing performance measurements, otherwise vanilla querying will not work. <br>
+`<query_print_enable>`: Set this to `1` if you would like to enable index printing of your lookup strings, or `0` otherwise. <br>
+&emsp;`-fo` Note: `query_print_enable` should be only disabled when doing performance measurements or when encoding very querying very  large files since it significantly affects the program execution time.<br>
 
 Here is an example execution command:
 ```
-./proj4.out col.txt 5 1
+./proj4.out col.txt 5 1 1
 ```
 
 Once the code is up and running, follow the instructions given by the terminal prompts. If you are using a large file for dictioary encoding, the encoding will take awhile (on my system, it took around 30 minutes). The reason it takes so long is to speed up the eventual search and scanning operations. This will be explained in more detail in the analysis section.
@@ -71,25 +72,25 @@ Once the code is up and running, follow the instructions given by the terminal p
 
 
 ## Experimental Results
-TBD
-
-## Analysis
 ### Encoding
 | Num Threads | Encoding Time \(s\) |
 |:-----------:|:-------------------:|
-| 1           | 124                 |
-| 2           | 252                 |
-| 4           | 239                 |
-| 8           | 242                 |
+| 1           | 000                 |
+| 2           | 000                 |
+| 4           | 000                 |
+| 8           | 000                 |
 
 ### Querying
-#### Lookup times \(in seconds\): <br>
+#### Lookup times \(in seconds\) using full-term 'pikgyaqet' or prefix term 'bruh': <br>
 | Vanilla Full-Term | Vanilla Prefix | Encoded Full-Term | Encoded Prefix | Encoded + SIMD Full-Term | Encoded + SIMD Prefix |
 |:-----------------:|:--------------:|:-----------------:|:--------------:|:------------------------:|:---------------------:|
 | 0                 | 000            |                   |                |                          |                       |
 | 0                 | 000            |                   |                |                          |                       |
 | 0                 | 000            |                   |                |                          |                       |
 | 0                 | 000            |                   |                |                          |                       |
+
+## Analysis
+
 
 ## Conclusion
 TBD
