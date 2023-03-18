@@ -16,16 +16,8 @@ and thus how quickly we can encode data. After the thread finishes executing, it
 originally read in.
 
 ### Querying Methodology
-The binary tree is used to massively speed up search operations. Specifically, once the dictionary has been encoded, we have a
-binary tree with every possible string entry loaded into it, along with an associated linked list structure that contains all
-the dictionary indices. A linked list was used specifically to deal with the issue of memory allocation, since a statically or
-dynamically allocated array would require a significant amount of memory rellocation, whereas a linked list can constantly add
-new points to newly allocated memory blocks. <br> <br>
-There are two querying options: full-term lookup and prefix lookup, and each of these can use one of three methods: Vanilla file
-scanning, encoded dictionary lookup, and encoded dictionary lookup with SIMD instructions. Full-term lookup is done by running
-string comparions down the binary tree starting from the tree root. This process is O(log n) and is thus much faster than vanilla
-term lookups which are O(n). This process is further sped up by using SIMD instructions to do string comparions since multiple bits\
-of data can be loaded into SIMD buffers and compared in parallel.
+The binary tree is used to massively speed up search operations. Specifically, once the dictionary has been encoded, we have a binary tree with every possible string entry loaded into it, along with an associated linked list structure that contains all the dictionary indices. A linked list was used specifically to deal with the issue of memory allocation, since a statically or dynamically allocated array would require a significant amount of memory rellocation, whereas a linked list can constantly add new points to newly allocated memory blocks. <br> <br>
+There are two querying options: full-term lookup and prefix lookup, and each of these can use one of three methods: Vanilla file scanning, encoded dictionary lookup, and encoded dictionary lookup with SIMD instructions. Full-term lookup is done by running string comparions down the binary tree starting from the tree root. This process is O(log n) and is thus much faster than vanilla term lookups which are O(n). This process is further sped up by using SIMD instructions to do string comparions since multiple bits of data can be loaded into SIMD buffers and compared in parallel.
 
 ## Usage
 Open a command terminal in a directory containing the `proj4.c`, `bin_tree.c`, and `bin_tree.h` files as well as your raw data file, e.g. `col.txt`, and use the commands below to compile and run the code. Note: you will have to install the `pthread` library if you do not have it, which can be done by entering the command: `sudo apt-get install libpthread-stubs0-dev`.
@@ -51,6 +43,8 @@ Here is an example execute command:
 ```
 ./proj4.out col.txt 5 1
 ```
+
+Once the code is up and running, follow the instructions given by the terminal prompts. If you are using a large file for dictioary encoding, the encoding will take awhile (on my system, it took around 30 minutes). The reason it takes so long is to speed up the eventual search and scanning operations. This will be explained in more detail in the analysis section.
 
 ## Testing Environment
 #### System
@@ -80,7 +74,22 @@ Here is an example execute command:
 TBD
 
 ## Analysis
-TBD
+### Encoding
+| Num Threads | Encoding Time \(s\) |
+|:-----------:|:-------------------:|
+| 1           | 124                 |
+| 2           | 252                 |
+| 4           | 239                 |
+| 8           | 242                 |
+
+### Queryuing
+Lookup times \(s\): <br>
+| Vanilla Full-Term | Vanilla Prefix | Encoded Full-Term | Encoded Prefix | Encoded + SIMD Full-Term | Encoded + SIMD Full-Term |
+|:-----------------:|:--------------:|:-----------------:|:--------------:|:------------------------:|:------------------------:|
+| 0                 | 000            |                   |                |                          |                          |
+| 0                 | 000            |                   |                |                          |                          |
+| 0                 | 000            |                   |                |                          |                          |
+| 0                 | 000            |                   |                |                          |                          |
 
 ## Conclusion
 TBD
