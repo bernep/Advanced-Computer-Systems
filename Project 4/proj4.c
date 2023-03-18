@@ -1,15 +1,14 @@
 /* proj4.c */
 /* Patrick Berne, Andre Shibata */
 
-// Example Compile Line: "gcc proj4.c bin_tree.c -o proj4.out -mavx2"
-// Example Execute Line: "./proj4.out col.txt 10 1"
+// Example Compile Line: "gcc proj4.c bin_tree.c -o proj4.out -msse4.1"
+// Example Execute Line: "./proj4.out col.txt 4 1 1"
 
 // Import libraries
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <immintrin.h>
 #include <pthread.h>
 #include <time.h>
 #include "bin_tree.h"
@@ -24,6 +23,7 @@ struct ThreadPacket {
 // Global variables
 struct TreeNode* TREE_ROOT = NULL;
 uint THREAD_LIMIT = 10;
+uint SSD_WRITE_ENABLE = 0;
 uint QUERY_PRINT_ENABLE = 0;
 uint ENCODED_VALUE = 1;
 pthread_mutex_t MUTEX;
@@ -152,17 +152,20 @@ int main(int argc, char* argv[]) {
     /* Set up file system and other initial variables for database generation */
 
     // Command-line error check.
-    if (argc < 4 || detect_int(argv[2]) == 0 || detect_int(argv[3]) == 0\
-                 || atoi(argv[3]) < 0 || atoi(argv[3]) > 1) {
+    if (argc < 5 || detect_int(argv[2]) == 0 || detect_int(argv[3]) == 0\
+                 || atoi(argv[3]) < 0 || atoi(argv[3]) > 1 || detect_int(argv[4]) == 0\
+                 || atoi(argv[4]) < 0 || atoi(argv[4]) > 1) {
         fprintf(stderr, "ERROR:\tInvalid argument(s)\n"\
-                        "USAGE:\tproj4.out <input_file> <num_threads> <query_print_enable>\n");
+                        "USAGE:\tproj4.out <input_file> <num_threads>"\
+                        "      <ssd_write_enable> <query_print_enable>\n");
         return EXIT_FAILURE;
     }
 
     // Grab command-line arguments
     char* input_filename = argv[1];
     THREAD_LIMIT = atoi(argv[2]);
-    QUERY_PRINT_ENABLE = atoi(argv[3]);
+    SSD_WRITE_ENABLE = atoi(argv[3]);
+    QUERY_PRINT_ENABLE = atoi(argv[4]);
     
     // Check if input file exists, and create a pointer to it
     FILE* input_file = fopen(input_filename, "r");
@@ -176,6 +179,10 @@ int main(int argc, char* argv[]) {
     strcpy(output_filename, "dict_");
     strcat(output_filename, input_filename);
     FILE* output_file = fopen(output_filename, "w");
+
+    // Timer variables
+    clock_t begin, end;
+    double time_spent;
     
     // Create arrays for of thread IDs and thread datafor each worker thread
     pthread_t thread_ids[THREAD_LIMIT];
@@ -189,7 +196,7 @@ int main(int argc, char* argv[]) {
 
     // Print startup and begin timer
     printf("Generating database... please wait (this can take awhile).\n");
-    clock_t begin = clock();
+    begin = clock();
 
     // Read in input data, spawn encoder thread for each line, and write data to output file
     char line[MAX_STR_LEN];
@@ -218,9 +225,11 @@ int main(int argc, char* argv[]) {
             pthread_join(thread_ids[row_num % THREAD_LIMIT], NULL);
             
             // Write data to output files
-            fprintf(output_file, "%u\t%s\n", threads[row_num % THREAD_LIMIT].key,\
+            if (SSD_WRITE_ENABLE == 1) {
+                fprintf(output_file, "%u\t%s\n", threads[row_num % THREAD_LIMIT].key,\
                     threads[row_num % THREAD_LIMIT].data);
-            fflush(stdout);
+                fflush(stdout);
+            }
     	    
     	    // Update tracker and free data
     	    active_threads--;
@@ -234,23 +243,25 @@ int main(int argc, char* argv[]) {
         pthread_join(thread_ids[i % THREAD_LIMIT], NULL);
         
         // Write entry to output file
-        fprintf(output_file, "%u\t%s\n", threads[i % THREAD_LIMIT].key,\
-        	    threads[i % THREAD_LIMIT].data);
-	    fflush(stdout);
+        if (SSD_WRITE_ENABLE == 1) {
+            fprintf(output_file, "%u\t%s\n", threads[i % THREAD_LIMIT].key,\
+            	    threads[i % THREAD_LIMIT].data);
+    	    fflush(stdout);
+        }
 	
 	    // Free data
         free(threads[i % THREAD_LIMIT].data);
     }
-	
-    // Print execution time for database generation
-    clock_t end = clock();
-    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-    printf("\nELAPSED TIME FOR DATABASE GENERATION:\n---> %f seconds\n", time_spent);
 
     // Close files and clean up
     fclose(input_file);
     fclose(output_file);
     free(threads);
+
+    // Print elapsed time
+    end = clock();
+    time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    printf("\nELAPSED TIME FOR DATABASE GENERATION:\n---> %f seconds\n", time_spent);
 
     // Print separator
     printf("\n=====================================================\n\n");
@@ -263,19 +274,23 @@ int main(int argc, char* argv[]) {
            "To query the database or exit the program, enter:\n"\
            "    1 for Vanilla Full-Term Column Search\n"\
            "    2 for Vanilla Prefix Column Search\n"\
-           "    3 for Encoded/SIMD Full-Term Column Search\n"\
-           "    4 for Encoded/SIMD Prefix Column Search\n"\
+           "    3 for Encoded Full-Term Column Search\n"\
+           "    4 for Encoded Prefix Column Search\n"\
+           "    5 for Encoded & SIMD Full-Term Column Search\n"\
+           "    6 for Encoded & SIMD Prefix Column Search\n"\
            "    0 to Exit Program\n");
 
     // Print separator
     printf("\n=====================================================\n\n");
 
-    // Prompt user for input and query as needed in a continuous loop
+    // Variable initialization
     char user_input[MAX_STR_LEN];
     user_input[0] = '8';
+
+    // Prompt user for input and query as needed in a continuous loop
     while (strcmp(user_input, "0") != 0) {
         // Get user input
-        printf("Please enter 1, 2, 3, 4, or 0: ");   
+        printf("Please enter 1, 2, 3, 4, 5, 6, or 0: ");   
         scanf("%s", user_input);
 
         // Vanilla full-term column search
@@ -330,11 +345,11 @@ int main(int argc, char* argv[]) {
             printf("\nELAPSED TIME FOR QUERY:\n---> %f seconds\n", time_spent);
         }
 
-        // Encoded/SIMD full-term column search
+        // Encoded full-term column search
         else if (strcmp(user_input, "3") == 0) {
             // Get input
             char search_term[MAX_STR_LEN];
-            printf("\n=== ENCODED/SIMD FULL-TERM COLUMN SEARCH ===\n"\
+            printf("\n=== ENCODED FULL-TERM COLUMN SEARCH ===\n"\
                    "Please enter the string you are looking for: ");
             scanf("%s", search_term);
 
@@ -357,10 +372,14 @@ int main(int argc, char* argv[]) {
                 }
                 struct ListNode* indices = tree_get_indices(code, TREE_ROOT);
                 if (indices != NULL) {
-                    if (QUERY_PRINT_ENABLE == 1) printf("    %d\n", indices->index);
+                    if (QUERY_PRINT_ENABLE == 1) {
+                        printf("    %d\n", indices->index);
+                    }
                     while (indices->next != NULL) {
                         indices = indices->next;
-                        if (QUERY_PRINT_ENABLE == 1) printf("    %d\n", indices->index);
+                        if (QUERY_PRINT_ENABLE == 1) {
+                            printf("    %d\n", indices->index);
+                        }
                     }
                 }
             } else {
@@ -373,11 +392,11 @@ int main(int argc, char* argv[]) {
             printf("\nELAPSED TIME FOR QUERY:\n---> %f seconds\n", time_spent);
         }
 
-        // Encoded/SIMD prefix column search
+        // Encoded prefix column search
         else if (strcmp(user_input, "4") == 0) {
             // Get input
             char search_term[MAX_STR_LEN];
-            printf("\n=== ENCODED/SIMD PREFIX COLUMN SEARCH ===\n"\
+            printf("\n=== ENCODED PREFIX COLUMN SEARCH ===\n"\
                    "Please enter the prefix you are looking for: ");
             scanf("%s", search_term);
 
@@ -405,7 +424,9 @@ int main(int argc, char* argv[]) {
                 }
                 for (int i = 0; i < codes_size; i++) {
                     tree_code_search(codes[i], result, TREE_ROOT);
-                    if (QUERY_PRINT_ENABLE == 1) printf("\t%s\n", result);
+                    if (QUERY_PRINT_ENABLE == 1) {
+                        printf("\t%s\n", result);
+                    }
                 }
 
                 // For each matching code in the dictionary, print their index
@@ -417,12 +438,135 @@ int main(int argc, char* argv[]) {
                     // Iterate through all the valid codes
                     for (int i = 0; i < codes_size; i++) {
                         tree_code_search(codes[i], result, TREE_ROOT);
-                        if (QUERY_PRINT_ENABLE == 1) printf("\n    %s:\n", result);
                         struct ListNode* indices = tree_get_indices(codes[i], TREE_ROOT);
-                        if (QUERY_PRINT_ENABLE == 1) printf("        %d\n", indices->index);
+                        if (QUERY_PRINT_ENABLE == 1) {
+                            printf("\n    %s:\n", result);
+                            printf("        %d\n", indices->index);
+                        }
                         while (indices->next != NULL) {
                             indices = indices->next;
-                            if (QUERY_PRINT_ENABLE == 1) printf("        %d\n", indices->index);
+                            if (QUERY_PRINT_ENABLE == 1) {
+                                printf("        %d\n", indices->index);
+                            }
+                        }
+                    }
+                }
+            } else {
+                printf("\nNo matching strings for prefix \"%s\".\n", search_term);
+            }
+
+            // Free memory
+            free(codes); 
+
+            // Print elapsed time
+            end = clock();
+            time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+            printf("\nELAPSED TIME FOR QUERY:\n---> %f seconds\n", time_spent);
+        }
+
+        // Encoded & SIMD full-term column search
+        else if (strcmp(user_input, "5") == 0) {
+            // Get input
+            char search_term[MAX_STR_LEN];
+            printf("\n=== ENCODED & SIMD FULL-TERM COLUMN SEARCH ===\n"\
+                   "Please enter the string you are looking for: ");
+            scanf("%s", search_term);
+
+            // Begin timer
+            begin = clock();
+
+            // Search for matching string, obtain its code
+            uint code = tree_simd_str_search(search_term, TREE_ROOT);
+
+            // For each matching code in the dictionary, print their index
+            if (code > 0) {
+                if (QUERY_PRINT_ENABLE == 1) {
+                    printf("\nMatching string(s) for search term \"%s\" found at "\
+                           "the following lines:\n", search_term);
+                } else {
+                    printf("\nMatching string(s) for search term \"%s\" found!\n", search_term);
+                    printf("Please wait for the query to find indices.\n");
+                    printf("Note: The indices will not print.\n");
+                    printf("\nSearching...\n");
+                }
+                struct ListNode* indices = tree_get_indices(code, TREE_ROOT);
+                if (indices != NULL) {
+                    if (QUERY_PRINT_ENABLE == 1) {
+                        printf("    %d\n", indices->index);
+                    }
+                    while (indices->next != NULL) {
+                        indices = indices->next;
+                        if (QUERY_PRINT_ENABLE == 1) {
+                            printf("    %d\n", indices->index);
+                        }
+                    }
+                }
+            } else {
+                printf("\nNo matching strings for search term \"%s\".\n", search_term);
+            }
+
+            // Print elapsed time
+            end = clock();
+            time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+            printf("\nELAPSED TIME FOR QUERY:\n---> %f seconds\n", time_spent);
+        }
+
+        // Encoded prefix column search
+        else if (strcmp(user_input, "6") == 0) {
+            // Get input
+            char search_term[MAX_STR_LEN];
+            printf("\n=== ENCODED & SIMD PREFIX COLUMN SEARCH ===\n"\
+                   "Please enter the prefix you are looking for: ");
+            scanf("%s", search_term);
+
+            // Begin timer
+            begin = clock();
+
+            // Setup variables for searching
+            char result[MAX_STR_LEN];
+            uint* codes = malloc(ENCODED_VALUE*sizeof(uint)); // Overkill, but simple
+            size_t codes_size = 0;
+
+            // Search for strings with matching prefix, store their codes in codes[]
+            tree_simd_prefix_search(search_term, codes, &codes_size, TREE_ROOT);
+
+            // For each matching code, print their matching dictionary entry
+            if (codes_size > 0) {
+                // Check if entry exists in binary tree
+                if (QUERY_PRINT_ENABLE == 1) {
+                    printf("\nMatching string(s) for prefix \"%s\" found:\n", search_term);
+                } else {
+                    printf("\nMatching string(s) for prefix \"%s\" found!\n", search_term);
+                    printf("Please wait for the query to find indices.\n");
+                    printf("Note: The indices will not print.\n");
+                    printf("\nSearching...\n");
+                }
+                for (int i = 0; i < codes_size; i++) {
+                    tree_code_search(codes[i], result, TREE_ROOT);
+                    if (QUERY_PRINT_ENABLE == 1) {
+                        printf("\t%s\n", result);
+                    }
+                }
+
+                // For each matching code in the dictionary, print their index
+                if (codes_size > 0) {
+                    if (QUERY_PRINT_ENABLE == 1) {
+                        printf("\nMatching string(s) for prefix \"%s\" found at "\
+                               "the following lines:\n", search_term);
+                    }
+                    // Iterate through all the valid codes
+                    for (int i = 0; i < codes_size; i++) {
+                        tree_code_search(codes[i], result, TREE_ROOT);
+                        struct ListNode* indices = tree_get_indices(codes[i], TREE_ROOT);
+                        if (QUERY_PRINT_ENABLE == 1) {
+                            printf("\n    %s:\n", result);
+                            printf("        %d\n", indices->index);
+                        }
+                        while (indices->next != NULL) {
+                            indices = indices->next;
+                            if (QUERY_PRINT_ENABLE == 1) {
+                                printf("        %d\n", indices->index);
+                            }
                         }
                     }
                 }
