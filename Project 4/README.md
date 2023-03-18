@@ -35,11 +35,11 @@ Execute line:
 Arguments:<br>
 `<input_file>`: The name of your input file, e.g. `col.txt`<br>
 `<num_threads>`: The number of worker threads you would like to run for encoding.<br>
-`<query_print_enable>`: Set this to '1' if you would like to enable index printing of your lookup strings.<br>
+`<query_print_enable>`: Set this to '1' if you would like to enable index printing of your lookup strings, or `0` otherwise. <br>
 &emsp;`-fo` Note: `query_print_enable` should be disabled when doing performance comparisons since it significantly
                   affects the program execution time.<br>
 
-Here is an example execute command:
+Here is an example execution command:
 ```
 ./proj4.out col.txt 5 1
 ```
@@ -82,8 +82,8 @@ TBD
 | 4           | 239                 |
 | 8           | 242                 |
 
-### Queryuing
-Lookup times \(s\): <br>
+### Querying
+#### Lookup times \(in seconds\): <br>
 | Vanilla Full-Term | Vanilla Prefix | Encoded Full-Term | Encoded Prefix | Encoded + SIMD Full-Term | Encoded + SIMD Prefix |
 |:-----------------:|:--------------:|:-----------------:|:--------------:|:------------------------:|:---------------------:|
 | 0                 | 000            |                   |                |                          |                       |
