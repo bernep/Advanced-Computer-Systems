@@ -45,7 +45,7 @@ Here is an example execution command:
 ./proj4.out col.txt 4 1 1
 ```
 
-Once the code is up and running, follow the instructions given by the terminal prompts. If you are using a large file for dictionary encoding, the encoding will take awhile (on my system, it took around 30 minutes using 4 threads). The reason it takes so long is to speed up the eventual search and scanning operations. This will be explained in more detail in the Analysis section.
+Once the code is up and running, follow the instructions given by the terminal prompts. If you are using a large file for dictionary encoding (e.g. the file that the professor provided), the encoding will take awhile (on my system, it took around 25 minutes using 4 threads). The reason it takes so long is to speed up the eventual search and scanning operations. This will be explained in more detail in the Analysis section.
 
 ## Testing Environment
 #### System
@@ -119,4 +119,4 @@ SIMD instructions are used to speed up string comparisons, although this doesn't
 Ultimately, the benefits of encoding a dictionary can be seen from how quickly one can compare an encoded value (e.g. an integer) with another encoded value versus comparing one string with another string (i.e. the former is much faster). Additionally, SIMD instructions can be used to further increase the speed at which these comparisons can be made. In our implementation, these benefits were not very well exploited, and instead we relied more on binary tree and linked list data structures to speed up searching and scanning. Ultimately, the best implementation of dictionary encoding depends on what your design needs. If you want to do exclusively memory lookups, a binary tree, B-tree, or hash table is very quick and will do the job well, and SIMD processing is likely not needed. Alternatively, if reading from a file, using one of these data structures as a key:value dictionary lookup while scanning a dictionary file with SIMD instructions can be very quick with minimal memory usage.
 
 ## Troubleshooting
-If you run into any issues running this code, please contact me (Patrick Berne) over Webex. As a note: encoding takes *awhile* if you're running this on the 1GB file that the professor provided. I would recommend using either a smaller file, or using 4-8 threads for the large file and leaving your computer running for up to an hour while the code generates the dictionary.
+If you run into any issues running this code, please contact me (Patrick Berne) over Webex. As a note: encoding takes *awhile* if you're running this on the 1GB file that the professor provided. I would recommend using 4-8 threads for the large file and leaving your computer running for up to an hour while the code generates the dictionary. Once the dictionary is generated, querying is very quick and simple.
