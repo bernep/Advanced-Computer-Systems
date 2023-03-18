@@ -4,15 +4,12 @@ This project showcases the performance differences between standard C instructio
 
 ### Usage
 Open a command terminal in a directory containing the `proj2.c` file, and use the commands below to compile and run the code.
-```
-proj2.c
-``` 
 
 Compile line:
 ```
 gcc proj2.c -o proj2.out -mavx2 -mavx512bw -mavx512vl
 ```
-Assuming you're using relatively modern x86 processor, you should have all of these libraries already. However, if you cannot get your code to compile, then just run the included `proj2.c` executable file.
+Assuming you're using relatively modern x86 processor, you should have all of these libraries already. However, if you cannot get your code to compile, then just run the included `proj2.out` executable file.
 
 Execute line:
 ```
