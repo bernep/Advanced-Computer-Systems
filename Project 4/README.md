@@ -73,8 +73,8 @@ Once the code is up and running, follow the instructions given by the terminal p
 
 ## Experimental Results
 For all tests, the following execution command was run:
-```./proj4.out col.txt <x> 0 0```
-where `<x>` was the desired number of threads.
+```./proj4.out Column.txt <x> 0 0```
+where `Column.txt` is a 1GB raw column data file and `<x>` was the desired number of threads.
 
 ### Encoding
 | Num Threads | Encoding Time \(s\) |
