@@ -42,10 +42,10 @@ Arguments:<br>
 
 Here is an example execution command:
 ```
-./proj4.out col.txt 5 1 1
+./proj4.out col.txt 4 1 1
 ```
 
-Once the code is up and running, follow the instructions given by the terminal prompts. If you are using a large file for dictioary encoding, the encoding will take awhile (on my system, it took around 30 minutes). The reason it takes so long is to speed up the eventual search and scanning operations. This will be explained in more detail in the analysis section.
+Once the code is up and running, follow the instructions given by the terminal prompts. If you are using a large file for dictionary encoding, the encoding will take awhile (on my system, it took around 30 minutes using 4 threads). The reason it takes so long is to speed up the eventual search and scanning operations. This will be explained in more detail in the analysis section.
 
 ## Testing Environment
 #### System
@@ -90,7 +90,7 @@ Once the code is up and running, follow the instructions given by the terminal p
 | 0                 | 000            |                   |                |                          |                       |
 
 ## Analysis
-
+TBD
 
 ## Conclusion
 TBD
