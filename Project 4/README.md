@@ -36,9 +36,9 @@ Arguments:<br>
 `<input_file>`: The name of your input file, e.g. `col.txt`<br>
 `<num_threads>`: The number of worker threads you would like to run for encoding.<br>
 `<ssd_write_enable>`: Set this to `1` if you do not want to write data to the SSD. <br>
-&emsp;`-fo` Note: `ssd_write_enable` should be only disabled when doing performance measurements, otherwise vanilla querying will not work. <br>
+&emsp; Note: `ssd_write_enable` should be only disabled when doing performance measurements, otherwise vanilla querying will not work. <br>
 `<query_print_enable>`: Set this to `1` if you would like to enable index printing of your lookup strings, or `0` otherwise. <br>
-&emsp;`-fo` Note: `query_print_enable` should be only disabled when doing performance measurements or when encoding very querying very  large files since it significantly affects the program execution time.<br>
+&emsp; Note: `query_print_enable` should be only disabled when doing performance measurements or when encoding very querying very  large files since it significantly affects the program execution time.<br>
 
 Here is an example execution command:
 ```
