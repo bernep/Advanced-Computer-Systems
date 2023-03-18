@@ -84,12 +84,12 @@ TBD
 
 ### Queryuing
 Lookup times \(s\): <br>
-| Vanilla Full-Term | Vanilla Prefix | Encoded Full-Term | Encoded Prefix | Encoded + SIMD Full-Term | Encoded + SIMD Full-Term |
-|:-----------------:|:--------------:|:-----------------:|:--------------:|:------------------------:|:------------------------:|
-| 0                 | 000            |                   |                |                          |                          |
-| 0                 | 000            |                   |                |                          |                          |
-| 0                 | 000            |                   |                |                          |                          |
-| 0                 | 000            |                   |                |                          |                          |
+| Vanilla Full-Term | Vanilla Prefix | Encoded Full-Term | Encoded Prefix | Encoded + SIMD Full-Term | Encoded + SIMD Prefix |
+|:-----------------:|:--------------:|:-----------------:|:--------------:|:------------------------:|:---------------------:|
+| 0                 | 000            |                   |                |                          |                       |
+| 0                 | 000            |                   |                |                          |                       |
+| 0                 | 000            |                   |                |                          |                       |
+| 0                 | 000            |                   |                |                          |                       |
 
 ## Conclusion
 TBD
