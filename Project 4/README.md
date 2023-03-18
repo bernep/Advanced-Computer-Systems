@@ -79,7 +79,7 @@ where `Column.txt` is a 1GB raw column data file and `<x>` was the desired numbe
 ### Encoding
 | Num Threads | Encoding Time \(s\) |
 |:-----------:|:-------------------:|
-| 1           | 000                 |
+| 1           | 2725                |
 | 2           | 000                 |
 | 4           | 000                 |
 | 8           | 000                 |
