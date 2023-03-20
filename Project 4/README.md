@@ -101,16 +101,12 @@ where `Column.txt` is a 1GB raw column data file and `<x>` was the desired numbe
 
 
 ## Analysis
-### Note from Patrick
-This blurb is mainly for the professor. This code works as intended, but perhaps is not implemented exactly as was implied by the project description. Specifically, querying operations for the encoded dictionary are not done by scanning the encoded file, but rather by looking up values in the binary tree stored in memory. Initially, I had tried to do a scan of the encoded dictionary, but due to how I was doing file parsing (i.e. separating the encoded value from its associated string), it was always slower to query it. I instead opted to use the binary tree that I had generated to do querying, and once it had been implemented, I re-read the project description and realized this wasn't the intended way of doing querying. Ultimately, I've run out of time to work on this assignment due to time constraints from other classes and life activities, so I'm turning this in as is. You can still query very quickly, much faster than with vanilla searching, but there is no encoded file scanning involved.
-
-### Explanation of Results
-#### Encoding
+### Encoding
 Encoding takes *awhile*, and this is because every time a string is read from the dictionary, it is inserted into the binary tree (or rejected if it's already present). As a result, a lot of memory management is involved when encoding the dictionary. The benefit of doing this, however, is that string lookups become very quick since searching a binary tree is an O(log n) process, as opposed to an O(n) process, and you additionally avoid having to parse data in the file.<br>
 
 Multithreading is working as intended, i.e. we see that using 4-8 threads is significantly faster than doing everything on a single thread. Specifically, data is given a code and appended to the binary tree structure using multiple threads, and since this can be done in parallel, it significantly speeds up how fast we can populate our tree. File writing is still done sequentially (i.e. in the main process) to maintain the same order as in the original file.
 
-#### Querying
+### Querying
 Since querying is done using a binary tree stored in memory, it is quite fast, i.e. two orders of magnitude faster for full-term lookups and an order of magnitude faster for prefix lookups compared to vanilla searching. Since a binary tree is used to find data, it can often be quickly found by scanning the tree in a binary fashion, rather than a linear file scan. <br>
 
 SIMD instructions are used to speed up string comparisons, although this doesn't speed things up very much since scanning the binary tree is not a process that can be done in parallel very well. The place where SIMD instructions are implemented are when strings are compared. This is slightly faster for full-term lookups since strings can be placed into SIMD buffers and then compared with an XOR statement, however this process is slower for prefix lookups since strings have to be shortened to the length of the desired prefix before being placed into a comparison buffer.
