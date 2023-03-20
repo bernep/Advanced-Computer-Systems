@@ -102,7 +102,7 @@ where `Column.txt` is a 1GB raw column data file and `<x>` was the desired numbe
 
 ## Analysis
 ### Encoding
-Encoding takes *awhile*, and this is because every time a string is read from the dictionary, it is inserted into the binary tree (or rejected if it's already present). As a result, a lot of memory management is involved when encoding the dictionary. The benefit of doing this, however, is that string lookups become very quick since searching a binary tree is an O(log n) process, as opposed to an O(n) process, and you additionally avoid having to parse data in the file.<br>
+Encoding takes *awhile*, and this is because every time a string is read from the dictionary, it is inserted into the binary tree (or rejected if it's already present). As a result, a lot of memory management is involved when encoding the dictionary. The benefit of doing this, however, is that string lookups become very quick since searching a binary tree is an O(log n) process, as opposed to an O(n) process.
 
 Multithreading is working as intended, i.e. we see that using 4-8 threads is significantly faster than doing everything on a single thread. Specifically, data is given a code and appended to the binary tree structure using multiple threads, and since this can be done in parallel, it significantly speeds up how fast we can populate our tree. File writing is still done sequentially (i.e. in the main process) to maintain the same order as in the original file.
 
