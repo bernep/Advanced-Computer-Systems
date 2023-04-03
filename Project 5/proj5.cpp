@@ -1,8 +1,8 @@
 /* proj5.cpp*/
 /* Patrick Berne, Andre Shibata */
 
-// Example Compile Line: g++ -std=c++11 proj5.cpp -o proj5.out -lopencv_core -lopencv_videoio -I/usr/include/opencv4
-// Example Execute Line: ./proj5.out my_video_short.mp4 5 1 1
+// Example Compile Line: g++ -std=c++11 proj5.cpp -o proj5.out -lopencv_core -lopencv_videoio -lopencv_imgproc -lopencv_imgcodecs -I/usr/include/opencv4
+// Example Execute Line: ./proj5.out my_video_short.mp4 5 0 1
 
 // Import libraries
 #include <iostream>
@@ -31,12 +31,9 @@ struct FrameData {
 uint THREAD_LIMIT = 5;
 uint SIMD_ENABLED = 0;
 uint PRINT_ENABLED = 0;
-uint IMAGE_PROCESS_1 = 0;
+uint IMAGE_PROCESS_1 = 1;
 uint IMAGE_PROCESS_2 = 0;
 uint IMAGE_PROCESS_3 = 0;
-uint SIMD_IMAGE_PROCESS_1 = 0;
-uint SIMD_IMAGE_PROCESS_2 = 0;
-uint SIMD_IMAGE_PROCESS_3 = 0;
 
 // Function: Check if string is a valid integer
 bool detect_int(char* ptr) {
@@ -82,7 +79,7 @@ void simd_image_process_3(FrameData* f_dat) {
 // Function: Worker thread for individual frame image processing
 void* process_frame(void* frame_data) {
     // Obtain argument in a decent format
-    struct FrameData* f_dat = (FrameData*)frame_data;
+    FrameData& f_dat = *static_cast<FrameData*>(frame_data);
 
     // ----> I don't feel like entering user query code right now, so just
     //       toggle these on and off as needed for development
@@ -95,32 +92,32 @@ void* process_frame(void* frame_data) {
     if (SIMD_ENABLED == 0) {
         // Image processing algorithm #1
         if (IMAGE_PROCESS_1 == 1) {
-            image_process_1(f_dat);
+            image_process_1(&f_dat);
         }
 
         // Image processing algorithm #2
         if (IMAGE_PROCESS_2 == 1) {
-            image_process_2(f_dat);
+            image_process_2(&f_dat);
         }
 
         // Image processing algorithm #3
         if (IMAGE_PROCESS_3 == 1) {
-            image_process_3(f_dat);
+            image_process_3(&f_dat);
         }
     } else {
         // Image processing algorithm #1
         if (IMAGE_PROCESS_1 == 1) {
-            simd_image_process_1(f_dat);
+            simd_image_process_1(&f_dat);
         }
 
         // Image processing algorithm #2
         if (IMAGE_PROCESS_2 == 1) {
-            simd_image_process_2(f_dat);
+            simd_image_process_2(&f_dat);
         }
 
         // Image processing algorithm #3
         if (IMAGE_PROCESS_3 == 1) {
-            simd_image_process_3(f_dat);
+            simd_image_process_3(&f_dat);
         }
     }
 
@@ -217,6 +214,9 @@ int main(int argc, char* argv[]) {
 
             // Write processed frame to output file
             writer.write(threads_data[frame_num % THREAD_LIMIT].frame);
+
+            cout << threads_data[frame_num % THREAD_LIMIT].frame_num << endl;
+
         }
 
         // Assign frame data to active data thread
