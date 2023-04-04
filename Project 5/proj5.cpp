@@ -1,79 +1,31 @@
 /* proj5.cpp*/
-/* Patrick Berne, Andre Shibata */
-
-// Example Compile Line: g++ -std=c++11 proj5.cpp -o proj5.out -lopencv_core -lopencv_videoio -lopencv_imgproc -lopencv_imgcodecs -I/usr/include/opencv4
-// Example Execute Line: ./proj5.out my_video_short.mp4 5 0 1
 
 // Import libraries
-#include <iostream>
-#include <cstdlib>
-#include <cstring>
-#include <pthread.h>
-#include <time.h>
-#include <opencv2/opencv.hpp>
-
-// Definitions
-#define uint unsigned int
-
-// Namespaces
-using namespace std;
-
-// Struct to hold frame and metadata information
-struct FrameData {
-    cv::Mat frame;
-    int frame_num;
-    int frame_width;
-    int frame_height;
-    int thread_num;
-};
+#include "proj5.h"
 
 // Global variables
-uint THREAD_LIMIT = 5;
+uint THREAD_LIMIT = 8;
 uint SIMD_ENABLED = 0;
-uint PRINT_ENABLED = 0;
-uint IMAGE_PROCESS_1 = 1;
-uint IMAGE_PROCESS_2 = 0;
-uint IMAGE_PROCESS_3 = 0;
+uint MAX_FRAME_COUNT = 0;
+uint ENABLE_GAUSSIAN_BLUR = 0;
+uint ENABLE_GRAYSCALE = 0;
+uint ENABLE_EDGE_DETECTION = 0;
 
-// Function: Check if string is a valid integer
-bool detect_int(char* ptr) {
-    char* end_ptr;
-    strtol(ptr, &end_ptr, 10);
-    if (*end_ptr == '\0' && atoi(ptr) >= 0) {
-        return true; // valid integer
-    } else {
-        return false; // invalid integer
+// Function: Check if string is a valid number
+bool is_num(const string& s) {
+    return !s.empty() && find_if(s.begin(), 
+        s.end(), [](unsigned char c) { return !isdigit(c); }) == s.end();
+}
+
+// Function: Reattach audio track to a video file
+void reattach_audio(const string& muted_video, const string& audible_video) {
+    string command = "ffmpeg -y -loglevel error -i " + muted_video + " -i " + audible_video\
+                   + " -c copy -map 0:v:0 -map 1:a:0 -shortest AUDIBLE_" + muted_video;
+    int result = system(command.c_str());
+    if (result != 0) {
+        cerr << "ERROR: FFmpeg audio reattach failed.\n"\
+             << "       If you would you like an audible video, please install FFmpeg.\n";
     }
-}
-
-// Function: Image processing algorithm #1 using naive instructions
-void image_process_1(FrameData* f_dat) {
-    // Do stuff to f_dat->frame
-}
-
-// Function: Image processing algorithm #2 using naive instructions
-void image_process_2(FrameData* f_dat) {
-    // Do stuff to f_dat->frame
-}
-
-// Function: Image processing algorithm #3 using naive instructions
-void image_process_3(FrameData* f_dat) {
-    // Do stuff to f_dat->frame
-}
-
-// Function: Image processing algorithm #1 using SIMD instructions
-void simd_image_process_1(FrameData* f_dat) {
-    // Do stuff to f_dat->frame
-}
-
-// Function: Image processing algorithm #2 using SIMD instructions
-void simd_image_process_2(FrameData* f_dat) {
-    // Do stuff to f_dat->frame
-}
-
-// Function: Image processing algorithm #3 using SIMD instructions
-void simd_image_process_3(FrameData* f_dat) {
-    // Do stuff to f_dat->frame
 }
 
 // Function: Worker thread for individual frame image processing
@@ -81,43 +33,40 @@ void* process_frame(void* frame_data) {
     // Obtain argument in a decent format
     FrameData& f_dat = *static_cast<FrameData*>(frame_data);
 
-    // ----> I don't feel like entering user query code right now, so just
-    //       toggle these on and off as needed for development
-    // ----> Ignore SIMD stuff for now
-    IMAGE_PROCESS_1 = 1;
-    IMAGE_PROCESS_2 = 0;
-    IMAGE_PROCESS_3 = 0;
-
     // Process frames using naive or SIMD instructions
     if (SIMD_ENABLED == 0) {
-        // Image processing algorithm #1
-        if (IMAGE_PROCESS_1 == 1) {
-            image_process_1(&f_dat);
+        // Gaussian blur (naive)
+        if (ENABLE_GAUSSIAN_BLUR == 1) {
+            int k_size = 10; // kernel size
+            double sigma = 2.0; // std. deviation
+            gaussian_blur(&f_dat, k_size, sigma);
         }
 
-        // Image processing algorithm #2
-        if (IMAGE_PROCESS_2 == 1) {
-            image_process_2(&f_dat);
+        // Grayscale (naive)
+        if (ENABLE_GRAYSCALE == 1) {
+            grayscale(&f_dat);
         }
 
-        // Image processing algorithm #3
-        if (IMAGE_PROCESS_3 == 1) {
-            image_process_3(&f_dat);
+        // Edge detection (naive)
+        if (ENABLE_EDGE_DETECTION == 1) {
+            edge_detection(&f_dat);
         }
     } else {
-        // Image processing algorithm #1
-        if (IMAGE_PROCESS_1 == 1) {
-            simd_image_process_1(&f_dat);
+        // Gaussian blur (SIMD)
+        if (ENABLE_GAUSSIAN_BLUR == 1) {
+            int k_size = 10; // kernel size
+            double sigma = 2.0; // std. deviation
+            simd_gaussian_blur(&f_dat, k_size, sigma);
         }
 
-        // Image processing algorithm #2
-        if (IMAGE_PROCESS_2 == 1) {
-            simd_image_process_2(&f_dat);
+        // Grayscale (SIMD)
+        if (ENABLE_GRAYSCALE == 1) {
+            simd_grayscale(&f_dat);
         }
 
-        // Image processing algorithm #3
-        if (IMAGE_PROCESS_3 == 1) {
-            simd_image_process_3(&f_dat);
+        // Edge detection (SIMD)
+        if (ENABLE_EDGE_DETECTION == 1) {
+            simd_edge_detection(&f_dat);
         }
     }
 
@@ -127,34 +76,28 @@ void* process_frame(void* frame_data) {
 
 // Function: Main
 int main(int argc, char* argv[]) {
-    /* === GENERAL INITIALIZATION === */
+    /* === INITIALIZATION === */
     /* Define all general variables necessary for program execution */
 
     // Command-line error check.
-    if (argc < 5 || detect_int(argv[2]) == false || atoi(argv[2]) < 1\
-                 || detect_int(argv[3]) == false || atoi(argv[3]) < 0 || atoi(argv[3]) > 1\
-                 || detect_int(argv[4]) == false || atoi(argv[4]) < 0 || atoi(argv[4]) > 1) {
+    if (argc < 4 || (!is_num(argv[2])) || (!is_num(argv[3])) || (argc > 5 && !is_num(argv[4]))
+                 || atoi(argv[2]) < 1 || atoi(argv[3]) < 0 || atoi(argv[3]) > 1
+                 || (argc > 4 && (atoi(argv[4]) < atoi(argv[2])))) {
         cerr << "ERROR:\tInvalid argument(s)\n"\
-                "USAGE:\tproj5.out <input_file> <num_threads> <SIMD_enable> <print_enable>\n";
+                "USAGE:\t./<executable_file> <video_filename> <num_threads> <SIMD_enabled> <max_frames>\n"\
+                "NOTE:\t<max_frames> is optional; it must not be less than num_threads\n";
         return EXIT_FAILURE;
     }
 
     // Grab command-line arguments
-    char* input_filename = argv[1];
+    string input_filename = argv[1];
     THREAD_LIMIT = atoi(argv[2]);
     SIMD_ENABLED = atoi(argv[3]);
-    PRINT_ENABLED = atoi(argv[4]);
+    MAX_FRAME_COUNT = (argc > 4) ? atoi(argv[4]) : MAX_FRAME_COUNT;
 
     // Timer variables
     clock_t begin, end;
     double time_spent;
-
-    /* === VIDEO AND THREADING INITIALIZATION === */
-    /* Set up necessary data structures and extract necessary metadata for video editing */
-
-    // Define thread array, and also allocate memory for frame data
-    pthread_t threads[THREAD_LIMIT];    
-    FrameData* threads_data = static_cast<FrameData*>(malloc(THREAD_LIMIT * sizeof(FrameData)));
 
     // Open video file for reading
     cv::VideoCapture cap(input_filename);
@@ -170,16 +113,19 @@ int main(int argc, char* argv[]) {
     int total_frames = cap.get(cv::CAP_PROP_FRAME_COUNT);
 
     // Print video metadata
-    if (PRINT_ENABLED == 1) {
-        cout << "Video Metadata:\n"\
-                "---> FPS: " << fps << "\n"\
-                "---> Frame Width: " << frame_width << "\n"\
-                "---> Frame Height: " << frame_height << "\n"\
-                "---> Total Frames: " << total_frames << "\n";
+    cout << "Video Metadata:\n"\
+            "---> FPS: " << fps << "\n"\
+            "---> Frame Width: " << frame_width << "\n"\
+            "---> Frame Height: " << frame_height << "\n"\
+            "---> Total Frames: " << total_frames << "\n";
+
+    // Adjust desired frames if argument was given
+    if (MAX_FRAME_COUNT == 0) {
+        MAX_FRAME_COUNT = total_frames;
     }
 
     // Define output video file
-    string output_filename = "output.mp4";
+    string output_filename = "PROCESSED_" + input_filename;
     cv::VideoWriter writer(output_filename, cv::VideoWriter::fourcc('a', 'v', 'c', '1'),\
                            fps, cv::Size(frame_width, frame_height), true);
     if (!writer.isOpened()) {
@@ -187,10 +133,50 @@ int main(int argc, char* argv[]) {
         return EXIT_FAILURE;
     }
 
+    // Define thread array, and also allocate memory for frame data
+    pthread_t threads[THREAD_LIMIT];    
+    FrameData* threads_data = new FrameData[THREAD_LIMIT];
+    for (uint i = 0; i < THREAD_LIMIT; ++i) {
+        threads_data[i].frame = cv::Mat::zeros(frame_height, frame_width, CV_8UC3);
+    }
+
     /* === USER QUERY === */
     /* Query the user for the desired image processing effect and performance settings */
+    
+    // User input variables
+    uint enable_gaussian_blur, enable_grayscale, enable_edge_detection;
 
-    // TBD - Do this later
+    // Query user for input
+    cout << "\nPlease enter your desired image processing settings.\n\n";
+
+    cout << "Enable Gaussian Blur? (0 for No, 1 for Yes): ";
+    cin >> enable_gaussian_blur;
+    if (enable_gaussian_blur != 0 && enable_gaussian_blur != 1) {
+        cerr << "ERROR: Invalid input. Try again.\n";
+        cin.clear();
+        return EXIT_FAILURE;
+    }
+
+    cout << "Enable Grayscale? (0 for No, 1 for Yes): ";
+    cin >> enable_grayscale;
+    if (enable_grayscale != 0 && enable_grayscale != 1) {
+        cerr << "ERROR: Invalid input. Try again.\n";
+        cin.clear();
+        return EXIT_FAILURE;
+    }
+
+    cout << "Enable Edge Detection? (0 for No, 1 for Yes): ";
+    cin >> enable_edge_detection;
+    if (enable_edge_detection != 0 && enable_edge_detection != 1) {
+        cerr << "ERROR: Invalid input. Try again.\n";
+        cin.clear();
+        return EXIT_FAILURE;
+    }
+
+    // Update global variables based on user input
+    ENABLE_GAUSSIAN_BLUR = enable_gaussian_blur;
+    ENABLE_GRAYSCALE = enable_grayscale;
+    ENABLE_EDGE_DETECTION = enable_edge_detection;
 
     /* === VIDEO PROCESSING === */
     /* Process video frame-by-frame */
@@ -199,15 +185,13 @@ int main(int argc, char* argv[]) {
     begin = clock();
 
     // Print process begin
-    if (PRINT_ENABLED == 1) {
-        cout << "\nVideo processing has begun\n";
-    }
+    cout << "\nVideo processing has begun.\n";
 
     // Loop through all frames and send them to worker threads for image processing
     uint frame_num = 0;
-    cv::Mat frame;
-    while (cap.read(frame)) {
-        // Check if thread limit has been reached
+    cv::Mat frame = cv::Mat::zeros(frame_height, frame_width, CV_8UC3);
+    while (cap.read(frame) && frame_num < MAX_FRAME_COUNT) {
+        // Wait for threads to rejoin if thread limit has been reached
         if (frame_num >= THREAD_LIMIT) {
             // Wait for last active thread to complete before continuing
             pthread_join(threads[frame_num % THREAD_LIMIT], NULL);
@@ -215,14 +199,16 @@ int main(int argc, char* argv[]) {
             // Write processed frame to output file
             writer.write(threads_data[frame_num % THREAD_LIMIT].frame);
 
-            cout << threads_data[frame_num % THREAD_LIMIT].frame_num << endl;
-
+            // Release associated frame from memory
+            threads_data[frame_num % THREAD_LIMIT].frame.release();
         }
 
         // Assign frame data to active data thread
         if (frame_num < THREAD_LIMIT) {
             threads_data[frame_num % THREAD_LIMIT].frame = frame.clone();
         } else {
+            threads_data[frame_num % THREAD_LIMIT].frame.release(); // Release the previous frame first
+            threads_data[frame_num % THREAD_LIMIT].frame = cv::Mat::zeros(frame_height, frame_width, CV_8UC3);
             frame.copyTo(threads_data[frame_num % THREAD_LIMIT].frame);
         }
         threads_data[frame_num % THREAD_LIMIT].frame_num = frame_num;
@@ -230,15 +216,14 @@ int main(int argc, char* argv[]) {
         threads_data[frame_num % THREAD_LIMIT].frame_height = frame_height;
         threads_data[frame_num % THREAD_LIMIT].thread_num = frame_num % THREAD_LIMIT;
 
+
         // Spawn new thread for image processing
         pthread_create(&threads[frame_num % THREAD_LIMIT], NULL, process_frame,\
                        (void*)&threads_data[frame_num % THREAD_LIMIT]);
 
         // Print progress
-        if (PRINT_ENABLED == 1) {
-            cout << "Processing frame " << frame_num+1 << "/" << total_frames
-                 << " in thread " << frame_num % THREAD_LIMIT << "\n";
-        }
+        cout << "Processing frame " << frame_num + 1 << "/" << MAX_FRAME_COUNT
+             << " in thread " << (frame_num % THREAD_LIMIT) + 1 << "\n";
 
         // Increment frame number
         frame_num++;
@@ -252,25 +237,42 @@ int main(int argc, char* argv[]) {
 
         // Write processed frame to output file
         writer.write(threads_data[frame_num % THREAD_LIMIT].frame);
+
+        // Release associated frame from memory
+        threads_data[frame_num % THREAD_LIMIT].frame.release();
     }
 
     // Print process end
-    if (PRINT_ENABLED == 1) {
-        cout << "Video processing has finished\n\n";
-    }
+    cout << "Video processing has finished.\n";
 
-    // Print elapsed time
+    // Get elapsed time
     end = clock();
     time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-    cout << "ELAPSED TIME FOR VIDEO PROCESSING:\n---> " << time_spent << " seconds\n";
 
     /* === END PROGRAM === */
     /* Clean up and end program */
 
-    // Release input capture and output writer
+    // Release OpenCV objects
     cap.release();
     writer.release();
+    frame.release();
 
-    // Exit
+    // Reattach audio from input video to processed video
+    cout << "\nAttempting to reattach audio to processed video...\n";
+    reattach_audio(output_filename, input_filename);
+    cout << "Audio reattachment finished.\n";
+
+    // Print elapsed time
+    cout << "\nELAPSED TIME FOR VIDEO PROCESSING:\n---> "<< time_spent/THREAD_LIMIT << " seconds\n";
+
+    // Close standard streams
+    cin.sync();
+    cin.clear();
+    cout.flush();
+
+    // Clean up memory
+    delete[] threads_data;
+
+    // Exit program
     return EXIT_SUCCESS;
 }
