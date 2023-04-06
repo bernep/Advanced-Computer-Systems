@@ -10,4 +10,4 @@ sudo apt install ffmpeg
 ffmpeg -version
 ```
 
-Sample videos can be found here: https://media.xiph.org/video/derf/
+Any .mp4 file will work. You can download one from anywhere. You can also specify the number of frames to process so that you do not have to process the entire video.
