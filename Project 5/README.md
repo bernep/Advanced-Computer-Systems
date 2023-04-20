@@ -1,16 +1,15 @@
 # Project 5: Video Processing using Multiple Threads and SIMD Parallelization
 
 ## Setup Instructions
-Follow OpenCV setup here: https://docs.opencv.org/4.x/d7/d9f/tutorial_linux_install.html
-
-Also nice to have: 
+1) OpenCV is needed to run this program. Please follow the isntructions for OpenCV setup here: https://docs.opencv.org/4.x/d7/d9f/tutorial_linux_install.html
+2) `ffmpeg` is not technically required, but without it, the output video will not have any audio. On Debian systems, this can be installed with the following commands:
 ```
 sudo apt update
 sudo apt install ffmpeg
 ffmpeg -version
 ```
 
-Any .mp4 file will work. You can download one from anywhere. You can also specify the number of frames to process so that you do not have to process the entire video.
+For other systems, please do your own research.
 
 ## Usage
 Open a command terminal in a directory containing the `proj5.h`, `proj5.cpp`, `gaussian_blur.cpp`, `grayscale.cpp`, and `edge_detection.cpp` files as well as your `<filename>.mp4` file, e.g. `my_video.mp4`, and use the commands below to compile and run the code.
@@ -19,26 +18,27 @@ Compile line:
 ```
 g++ -std=c++11 proj5.cpp gaussian_blur.cpp edge_detection.cpp grayscale.cpp -o proj5.out -lopencv_core -lopencv_videoio -lopencv_imgproc -I/usr/include/opencv4
 ```
-If you cannot get your code to compile, then just run the included `proj4.out` executable file.
+If you cannot get your code to compile, then just run the included `proj5.out` executable file.
 
 Execute line:
 ```
-./proj4.out <input_file> <num_threads> <ssd_write_enable> <query_print_enable>
+./proj5.out <filename>.mp4 <num_threads> <SIMD_enable> <num_frames>
 ```
 Arguments:<br>
-`<input_file>`: The name of your input file, e.g. `col.txt`<br>
-`<num_threads>`: The number of worker threads you would like to run for encoding.<br>
-`<ssd_write_enable>`: Set this to `1` if you want to write data to the SSD, and `0` otherwise. <br>
-&emsp; Note: `ssd_write_enable` should be only disabled when doing performance measurements, or if you don't want a dictionary file for some reason.
-`<query_print_enable>`: Set this to `1` if you would like to enable index printing of your lookup strings, or `0` otherwise. <br>
-&emsp; Note: `query_print_enable` should be only disabled when doing performance measurements or when encoding very querying very  large files since it significantly affects the program execution time.<br>
+`<filename>.mp4`: The name of your input file, e.g. `my_video.mp4`<br>
+`<num_threads>`: Specify the number of worker threads to use. <br>
+`<SIMD_enable>`: Set this to `1` if you would like to enable SIMD instructions. <br>
+`<num_frames>`: Optional argument. Set this to a desired number of frames to process. Exempt this argument if you would like to process the entire video.
 
-Here is an example execution command:
+Here are example execution commands:
 ```
-./proj4.out col.txt 4 1 1
+./proj5.out my_video.mp4 4 0 100
+./proj5.out my_video.mp4 8 0 100
+./proj5.out my_video.mp4 8 1 100
+./proj5.out my_video.mp4 8 1
 ```
 
-Once the code is up and running, follow the instructions given by the terminal prompts. If you are using a large file for dictionary encoding (e.g. the file that the professor provided), the encoding will take awhile (on my system, it took around 25 minutes using 4 threads). The reason it takes so long is to speed up the eventual search and scanning operations. This will be explained in more detail in the Analysis section.
+Once the code is up and running, follow the instructions given by the terminal prompts to enable different image processing effects. Note that invalid terminal inputs are not handled well, so please enter only `0` or `1` when prompted.
 
 ## Testing Environment
 #### System
