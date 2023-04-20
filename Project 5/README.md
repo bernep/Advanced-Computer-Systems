@@ -84,19 +84,19 @@ Here is an example of how to include images in your GitHub readme.
 
 ### Control Image
 
-![alt text]((https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog.png "Control")
+![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog.png "Control")
 
 ### Naive-Processed Images
 
-![alt text]((https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_gauss.png "Gaussian Blur")
-![alt text]((https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_gray.png "Grayscale")
-![alt text]((https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_edge.png "Edge Detection")
+![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_gauss.png "Gaussian Blur")
+![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_gray.png "Grayscale")
+![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_edge.png "Edge Detection")
 
 ### SIMD-Processed Images
 
-![alt text]((https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_gauss.png "Gaussian Blur")
-![alt text]((https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_gray.png "Grayscale")
-![alt text]((https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_edge.png "Edge Detection")
+![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_gauss.png "Gaussian Blur")
+![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_gray.png "Grayscale")
+![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_edge.png "Edge Detection")
 
 ## Analysis
 
