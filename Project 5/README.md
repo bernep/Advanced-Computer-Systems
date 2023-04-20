@@ -79,10 +79,9 @@ Once the code is up and running, follow the instructions given by the terminal p
 
 ## Experimental Results
 
-I used the first funny video I could find as a means of testing the video processing algorithms. The video can be found [here](https://www.youtube.com/watch?v=TnlakHr-O4w), and the video metadata is as follows:
+I used the first funny video that I could find as a means of testing the video processing algorithms. The video can be found [here](https://www.youtube.com/watch?v=TnlakHr-O4w), and the video metadata is as follows:
 
-Video Metadata: <br>
-| Metric       | Value |
+| Property     | Value |
 |:------------:|:-----:|
 | FPS          | 24    |
 | Frame Height | 540   |
