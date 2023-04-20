@@ -146,7 +146,7 @@ For the given video, 100 frames were processed with different settings. Grayscal
 
 ## Analysis
 
-In every case, increasing the number of threads reduced processing time, and enabling SIMD instructions reduced processing time. The slowest process by far was Gaussain blur since it naively requries a quadruple nested loop, which I was able to speed up with SIMD instructions. That being said, OpenCV's Gaussian blur is much faster than mine since they also use SIMD instructions, though they have had far more time and expertise to optimize their implementation. Additionally, OpenCV's Canny edge detection algorithm is done much better than mine (both in quality and processing speed) since mine is a manually-implemented naive algorithm and OpenCV's is a more researched, SIMD implementation.
+In every case, increasing the number of threads reduced processing time, and enabling SIMD instructions reduced processing time. The slowest process by far was Gaussian blur since it requries a quadruple nested loop, which I was able to speed up with SIMD instructions. That being said, OpenCV's Gaussian blur is much faster than mine since they also use SIMD instructions, though they have had far more time and expertise to optimize their implementation. Additionally, OpenCV's Canny edge detection algorithm is done much better than mine (both in quality and processing speed) since mine is a manually-implemented naive algorithm and OpenCV's is a more researched, SIMD implementation.
 
 ## Conclusion
 
