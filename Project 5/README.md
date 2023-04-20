@@ -1,5 +1,27 @@
 # Project 5: Video Processing using Multiple Threads and SIMD Parallelization
 
+## Overview
+Video processing can be a time-consuming process, though its inherent nature makes it ripe for parallel processing. Any video can be broken down into individual frames, and thus into separate worker threads. Within each of these threads, SIMD instructions can be used to speed up image processing computations on the desired frame. As such, the aim of this project is to analyze how parallelizing, both through multithreading and instrinsic instructions usage, significantly speeds up video processing.
+
+## Code Structure
+There are five files in this project: <br>
+`proj5.h`: Imports necessary libraries, defines datatypes, and establishes function prototypes. <br>
+`proj5.cpp`: Reads in user inputs and video file, calls image processing functions, then outputs processed video. <br>
+`gaussian_blur.cpp`: Implements two versions Gaussian blur: one using naive instructions, the other using SIMD instructions. <br>
+`edge_detection.cpp`: Implements two versions of Canny edge detection: one using naive isntructions, the other using OpenCV's Canny() function.
+`grayscale.cpp`: Implements grayscale manually using naive instructions.
+
+The main two functions we will be looking at for optimization are Gaussian Blur and Edge Detection since they are computionally expensive. Grayscale is a very basic function that just averages color channels, and grayscale is needed for edge detection anyway. In this project implementation, most functions were implemented manually, but some implementations use OpenCV's implementation since OpenCV uses SIMD instructions in their implementation to speed up image processing. Here is the breakdown of what functions were implemented manually (`Y` indicates manual implementation, `N` indicates usage of OpenCV's API):
+
+| Function                | Implemented Manually? |
+|:-----------------------:|:---------------------:|
+| Gaussian Blur (naive)   | Y                     |
+| Gaussian Blur (SIMD)    | Y                     |
+| Edge Detection (naive)  | Y                     |
+| Edge Detection (SIMD)   | N                     |
+| Grayscale (naive)       | Y                     |
+| Grayscale (SIMD)        | N                     |
+
 ## Setup Instructions
 1) OpenCV is needed to run this program. Please follow the isntructions for OpenCV setup here: https://docs.opencv.org/4.x/d7/d9f/tutorial_linux_install.html
 2) `ffmpeg` is not technically required, but without it, the output video will not have any audio. On Debian systems, this can be installed with the following commands:
@@ -8,8 +30,6 @@ sudo apt update
 sudo apt install ffmpeg
 ffmpeg -version
 ```
-
-For other systems, please do your own research.
 
 ## Usage
 Open a command terminal in a directory containing the `proj5.h`, `proj5.cpp`, `gaussian_blur.cpp`, `grayscale.cpp`, and `edge_detection.cpp` files as well as your `<filename>.mp4` file, e.g. `my_video.mp4`, and use the commands below to compile and run the code.
@@ -27,7 +47,7 @@ Execute line:
 Arguments:<br>
 `<filename>.mp4`: The name of your input file, e.g. `my_video.mp4`<br>
 `<num_threads>`: Specify the number of worker threads to use. <br>
-`<SIMD_enable>`: Set this to `1` if you would like to enable SIMD instructions. <br>
+`<SIMD_enable>`: Set this to `1` if you would like to enable SIMD instructions, or `0` otherwise. <br>
 `<num_frames>`: Optional argument. Set this to a desired number of frames to process. Exempt this argument if you would like to process the entire video.
 
 Here are example execution commands:
@@ -56,3 +76,9 @@ Once the code is up and running, follow the instructions given by the terminal p
 * DDR4 SO-DIMM
 * 3200 MHz
 * 32GB of Memory
+
+## Experimental Results
+
+## Analysis
+
+## Conclusion
