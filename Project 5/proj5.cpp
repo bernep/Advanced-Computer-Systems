@@ -8,8 +8,8 @@ uint THREAD_LIMIT = 8;
 uint SIMD_ENABLED = 0;
 uint MAX_FRAME_COUNT = 0;
 uint ENABLE_GAUSSIAN_BLUR = 0;
-uint ENABLE_GRAYSCALE = 0;
 uint ENABLE_EDGE_DETECTION = 0;
+uint ENABLE_GRAYSCALE = 0;
 
 // Function: Check if string is a valid number
 bool is_num(const string& s) {
@@ -22,7 +22,7 @@ void reattach_audio(const string& muted_video, const string& audible_video) {
     string command = "ffmpeg -y -loglevel error -i " + muted_video + " -i " + audible_video\
                    + " -c copy -map 0:v:0 -map 1:a:0 -shortest AUDIBLE_" + muted_video;
     int result = system(command.c_str());
-    if (result != 0) {
+    if (result != 0) {  
         cerr << "ERROR: FFmpeg audio reattach failed.\n"\
              << "       If you would you like an audible video, please install FFmpeg.\n";
     }
@@ -33,41 +33,41 @@ void* process_frame(void* frame_data) {
     // Obtain argument in a decent format
     FrameData& f_dat = *static_cast<FrameData*>(frame_data);
 
+    // Settings (Gaussian blur)
+    int k_size_gauss = 3; // kernel size
+    double sigma = 1.0; // std. deviation
+
+    // Settings (Edge detection)
+    double low = 50;
+    double high = 150;
+    int k_size_edge = 3;
+
     // Process frames using naive or SIMD instructions
     if (SIMD_ENABLED == 0) {
         // Gaussian blur (naive)
         if (ENABLE_GAUSSIAN_BLUR == 1) {
-            int k_size = 10; // kernel size
-            double sigma = 2.0; // std. deviation
-            gaussian_blur(&f_dat, k_size, sigma);
-        }
-
-        // Grayscale (naive)
-        if (ENABLE_GRAYSCALE == 1) {
-            grayscale(&f_dat);
+            gaussian_blur(&f_dat, k_size_gauss, sigma);
         }
 
         // Edge detection (naive)
         if (ENABLE_EDGE_DETECTION == 1) {
-            edge_detection(&f_dat);
+            edge_detection(&f_dat, low, high, k_size_edge);
         }
     } else {
         // Gaussian blur (SIMD)
         if (ENABLE_GAUSSIAN_BLUR == 1) {
-            int k_size = 10; // kernel size
-            double sigma = 2.0; // std. deviation
-            simd_gaussian_blur(&f_dat, k_size, sigma);
-        }
-
-        // Grayscale (SIMD)
-        if (ENABLE_GRAYSCALE == 1) {
-            simd_grayscale(&f_dat);
+            simd_gaussian_blur(&f_dat, k_size_gauss, sigma);
         }
 
         // Edge detection (SIMD)
         if (ENABLE_EDGE_DETECTION == 1) {
-            simd_edge_detection(&f_dat);
+            simd_edge_detection(&f_dat, low, high, k_size_edge);
         }
+    }
+
+    // Grayscale (if enabled and edge detection was skipped)
+    if (ENABLE_GRAYSCALE == 1) {
+        grayscale(&f_dat);
     }
 
     // Exit thread
@@ -100,17 +100,17 @@ int main(int argc, char* argv[]) {
     double time_spent;
 
     // Open video file for reading
-    cv::VideoCapture cap(input_filename);
+    VideoCapture cap(input_filename);
     if (!cap.isOpened()) {
         cerr << "ERROR:\tFailed to open video file: " << input_filename << "\n";
         return EXIT_FAILURE;
     }
 
     // Get video metadata
-    double fps = cap.get(cv::CAP_PROP_FPS);
-    int frame_width = cap.get(cv::CAP_PROP_FRAME_WIDTH);
-    int frame_height = cap.get(cv::CAP_PROP_FRAME_HEIGHT);
-    int total_frames = cap.get(cv::CAP_PROP_FRAME_COUNT);
+    double fps = cap.get(CAP_PROP_FPS);
+    int frame_width = cap.get(CAP_PROP_FRAME_WIDTH);
+    int frame_height = cap.get(CAP_PROP_FRAME_HEIGHT);
+    int total_frames = cap.get(CAP_PROP_FRAME_COUNT);
 
     // Print video metadata
     cout << "Video Metadata:\n"\
@@ -124,10 +124,10 @@ int main(int argc, char* argv[]) {
         MAX_FRAME_COUNT = total_frames;
     }
 
-    // Define output video file
+    // Define output video file and writer object
     string output_filename = "PROCESSED_" + input_filename;
-    cv::VideoWriter writer(output_filename, cv::VideoWriter::fourcc('a', 'v', 'c', '1'),\
-                           fps, cv::Size(frame_width, frame_height), true);
+    VideoWriter writer(output_filename, VideoWriter::fourcc('a', 'v', 'c', '1'),\
+                       fps, Size(frame_width, frame_height), true);
     if (!writer.isOpened()) {
         cerr << "ERROR:\tFailed to create output video file: " << output_filename << "\n";
         return EXIT_FAILURE;
@@ -137,14 +137,14 @@ int main(int argc, char* argv[]) {
     pthread_t threads[THREAD_LIMIT];    
     FrameData* threads_data = new FrameData[THREAD_LIMIT];
     for (uint i = 0; i < THREAD_LIMIT; ++i) {
-        threads_data[i].frame = cv::Mat::zeros(frame_height, frame_width, CV_8UC3);
+        threads_data[i].frame = Mat::zeros(frame_height, frame_width, CV_8UC3);
     }
 
     /* === USER QUERY === */
     /* Query the user for the desired image processing effect and performance settings */
     
     // User input variables
-    uint enable_gaussian_blur, enable_grayscale, enable_edge_detection;
+    uint enable_gaussian_blur, enable_edge_detection, enable_grayscale;
 
     // Query user for input
     cout << "\nPlease enter your desired image processing settings.\n\n";
@@ -153,15 +153,6 @@ int main(int argc, char* argv[]) {
     cin >> enable_gaussian_blur;
     if (enable_gaussian_blur != 0 && enable_gaussian_blur != 1) {
         cerr << "ERROR: Invalid input. Try again.\n";
-        cin.clear();
-        return EXIT_FAILURE;
-    }
-
-    cout << "Enable Grayscale? (0 for No, 1 for Yes): ";
-    cin >> enable_grayscale;
-    if (enable_grayscale != 0 && enable_grayscale != 1) {
-        cerr << "ERROR: Invalid input. Try again.\n";
-        cin.clear();
         return EXIT_FAILURE;
     }
 
@@ -169,14 +160,31 @@ int main(int argc, char* argv[]) {
     cin >> enable_edge_detection;
     if (enable_edge_detection != 0 && enable_edge_detection != 1) {
         cerr << "ERROR: Invalid input. Try again.\n";
-        cin.clear();
         return EXIT_FAILURE;
+    }
+
+    if (enable_edge_detection == 0) {
+        cout << "Enable Grayscale? (0 for No, 1 for Yes): ";
+        cin >> enable_grayscale;
+        if (enable_grayscale != 0 && enable_grayscale != 1) {
+            cerr << "ERROR: Invalid input. Try again.\n";
+            return EXIT_FAILURE;
+        }
+    } else {
+        enable_grayscale = 0;
     }
 
     // Update global variables based on user input
     ENABLE_GAUSSIAN_BLUR = enable_gaussian_blur;
-    ENABLE_GRAYSCALE = enable_grayscale;
     ENABLE_EDGE_DETECTION = enable_edge_detection;
+    ENABLE_GRAYSCALE = enable_grayscale;
+
+    // In case edge detection is enabled, writer needs to change to 1-channel output
+    if (ENABLE_EDGE_DETECTION == 1) {
+        writer.release();
+        writer.open(output_filename, VideoWriter::fourcc('a', 'v', 'c', '1'),\
+                    fps, Size(frame_width, frame_height), false);
+    }
 
     /* === VIDEO PROCESSING === */
     /* Process video frame-by-frame */
@@ -189,7 +197,7 @@ int main(int argc, char* argv[]) {
 
     // Loop through all frames and send them to worker threads for image processing
     uint frame_num = 0;
-    cv::Mat frame = cv::Mat::zeros(frame_height, frame_width, CV_8UC3);
+    Mat frame = Mat::zeros(frame_height, frame_width, CV_8UC3);
     while (cap.read(frame) && frame_num < MAX_FRAME_COUNT) {
         // Wait for threads to rejoin if thread limit has been reached
         if (frame_num >= THREAD_LIMIT) {
@@ -208,7 +216,7 @@ int main(int argc, char* argv[]) {
             threads_data[frame_num % THREAD_LIMIT].frame = frame.clone();
         } else {
             threads_data[frame_num % THREAD_LIMIT].frame.release(); // Release the previous frame first
-            threads_data[frame_num % THREAD_LIMIT].frame = cv::Mat::zeros(frame_height, frame_width, CV_8UC3);
+            threads_data[frame_num % THREAD_LIMIT].frame = Mat::zeros(frame_height, frame_width, CV_8UC3);
             frame.copyTo(threads_data[frame_num % THREAD_LIMIT].frame);
         }
         threads_data[frame_num % THREAD_LIMIT].frame_num = frame_num;
