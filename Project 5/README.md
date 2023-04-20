@@ -146,8 +146,8 @@ For the given video, 100 frames were processed with different settings. Grayscal
 
 ## Analysis
 
-TBD
+In every case, increasing the number of threads reduced processing time, and enabling SIMD instructions reduced processing time. The slowest process by far was Gaussain blur since it naively requries a quadruple nested loop, which I was able to speed up with SIMD instructions. That being said, OpenCV's Gaussian blur is much faster than mine since they also use SIMD instructions, though they have had far more time and expertise to optimize their implementation. Additionally, OpenCV's Canny edge detection algorithm is done much better than mine (both in quality and processing speed) since mine is a manually-implemented naive algorithm and OpenCV's is a more researched, SIMD implementation.
 
 ## Conclusion
 
-TBD
+The project successfully demonstrated the advantages of parallelizing video processing tasks using multithreading and SIMD instructions. The results indicate that employing these techniques can substantially reduce the processing time required for computationally intensive video processing tasks, such as Gaussian blur and edge detection. It is clear that leveraging the full potential of modern hardware through parallelization techniques can lead to significant performance improvements in video processing and other computationally-intensive tasks.
