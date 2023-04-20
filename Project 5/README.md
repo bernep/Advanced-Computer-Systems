@@ -150,4 +150,4 @@ In every case, increasing the number of threads reduced processing time, and ena
 
 ## Conclusion
 
-The project successfully demonstrated the advantages of parallelizing video processing tasks using multithreading and SIMD instructions. The results indicate that employing these techniques can substantially reduce the processing time required for computationally intensive video processing tasks, such as Gaussian blur and edge detection. It is clear that leveraging the full potential of modern hardware through parallelization techniques can lead to significant performance improvements in video processing and other computationally-intensive tasks.
+The advantages of parallelizing video processing tasks using multithreading and SIMD instructions are very clear. The results indicate that employing these techniques can substantially reduce the processing time required for computationally intensive video processing tasks, such as Gaussian blur and edge detection. It is clear that leveraging the full potential of modern hardware through parallelization techniques can lead to significant performance improvements in video processing.
