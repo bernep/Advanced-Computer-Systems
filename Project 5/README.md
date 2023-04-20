@@ -92,23 +92,23 @@ The following images were generated to show how each effect impacts a given vide
 
 ### Control Image
 
-<img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog.png" alt="Control" width="33%"/>
+<img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog.png" alt="Control" width="40%"/>
 
 ### Naive-Processed Images (Gaussian Blur, Grayscale, Edge Detection, All Effects)
 
 <p float="left">
-  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_gauss.png" alt="Gaussian Blur" width="25%"/>
-  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_gray.png" alt="Gaussian Blur" width="25%"/>
-  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_edge.png" alt="Edge Detection" width="25%"/>
-  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_full.png" alt="All Effects" width="25%"/>
+  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_gauss.png" alt="Gaussian Blur" width="40%"/>
+  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_gray.png" alt="Gaussian Blur" width="40%"/>
+  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_edge.png" alt="Edge Detection" width="40%"/>
+  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_full.png" alt="All Effects" width="40%"/>
 </p>
 
 ### SIMD-Processed Images (Gaussian Blur, Grayscale, Edge Detection, All Effects)
 <p float="left">
-  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_gauss.png" alt="Gaussian Blur" width="25%"/>
-  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_gray.png" alt="Gaussian Blur" width="25%"/>
-  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_edge.png" alt="Edge Detection" width="25%"/>
-  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_full.png" alt="All Effects" width="25%"/>
+  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_gauss.png" alt="Gaussian Blur" width="40%"/>
+  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_gray.png" alt="Gaussian Blur" width="40%"/>
+  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_edge.png" alt="Edge Detection" width="40%"/>
+  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_full.png" alt="All Effects" width="40%"/>
 </p
 
 ## Analysis
