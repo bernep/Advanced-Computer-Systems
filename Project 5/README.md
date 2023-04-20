@@ -8,10 +8,10 @@ There are five files in this project: <br>
 `proj5.h`: Imports necessary libraries, defines datatypes, and establishes function prototypes. <br>
 `proj5.cpp`: Reads in user inputs and video file, calls image processing functions, then outputs processed video. <br>
 `gaussian_blur.cpp`: Implements two versions Gaussian blur: one using naive instructions, the other using SIMD instructions. <br>
-`edge_detection.cpp`: Implements two versions of Canny edge detection: one using naive isntructions, the other using OpenCV's Canny() function.
-`grayscale.cpp`: Implements grayscale manually using naive instructions.
+`edge_detection.cpp`: Implements two versions of Canny edge detection: one using naive instructions, the other using OpenCV's Canny() function. <br>
+`grayscale.cpp`: Implements grayscale manually using naive instructions. <br>
 
-The main two functions we will be looking at for optimization are Gaussian Blur and Edge Detection since they are computionally expensive. Grayscale is a very basic function that just averages color channels, and grayscale is needed for edge detection anyway. In this project implementation, most functions were implemented manually, but some implementations use OpenCV's implementation since OpenCV uses SIMD instructions in their implementation to speed up image processing. Here is the breakdown of what functions were implemented manually (`Y` indicates manual implementation, `N` indicates usage of OpenCV's API):
+In this project implementation, most functions were implemented manually, but some implementations use OpenCV's implementation since OpenCV uses SIMD instructions to speed up image processing (also, edge detection is very difficult to implement manually using SIMD instructions). Here is the breakdown of what functions were implemented manually (`Y` indicates manual implementation, `N` indicates usage of OpenCV's API):
 
 | Function                | Implemented Manually? |
 |:-----------------------:|:---------------------:|
@@ -23,7 +23,7 @@ The main two functions we will be looking at for optimization are Gaussian Blur 
 | Grayscale (SIMD)        | N                     |
 
 ## Setup Instructions
-1) OpenCV is needed to run this program. Please follow the isntructions for OpenCV setup here: https://docs.opencv.org/4.x/d7/d9f/tutorial_linux_install.html
+1) OpenCV is needed to run this program. Please follow the instructions for OpenCV setup here: https://docs.opencv.org/4.x/d7/d9f/tutorial_linux_install.html
 2) `ffmpeg` is not technically required, but without it, the output video will not have any audio. On Debian systems, this can be installed with the following commands:
 ```
 sudo apt update
