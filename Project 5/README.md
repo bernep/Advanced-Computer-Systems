@@ -84,19 +84,19 @@ Here is an example of how to include images in your GitHub readme.
 
 ### Control Image
 
-![Control Image](/images/dog.png "Control")
+![alt text]((https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog.png "Control")
 
 ### Naive-Processed Images
 
-![Gaussian Blur](/images/dog0_gauss.png "Gaussian Blur")
-![Grayscale](/images/dog0_gray.png "Grayscale")
-![Edge Detection](/images/dog0_edge.png "Edge Detection")
+![alt text]((https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_gauss.png "Gaussian Blur")
+![alt text]((https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_gray.png "Grayscale")
+![alt text]((https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_edge.png "Edge Detection")
 
 ### SIMD-Processed Images
 
-![Gaussian Blur](/images/dog1_gauss.png "Gaussian Blur")
-![Grayscale](/images/dog1_gray.png "Grayscale")
-![Edge Detection](/images/dog1_edge.png "Edge Detection")
+![alt text]((https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_gauss.png "Gaussian Blur")
+![alt text]((https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_gray.png "Grayscale")
+![alt text]((https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_edge.png "Edge Detection")
 
 ## Analysis
 
