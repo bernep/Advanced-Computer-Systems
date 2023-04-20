@@ -90,7 +90,7 @@ I used the first funny video that I could find as a means of testing the video p
 
 ### Image Processing Tests
 
-The following images were generated to show how each effect impacts a given video frame. For this video frame, grayscale and edge detection are easy to see, but Gaussian blur is very subtle. Gaussian blur works better on videos with more detail, but the effect is there nonetheless. Also, OpenCV's edge detection is much better than mine, both in quality and processing speed, which can be seen with these image tests.
+The following images were generated to show how each effect impacts a given video frame. For this video frame, grayscale and edge detection are easy to see, but Gaussian blur is very subtle. Gaussian blur works better on videos with more detail, but the effect is there nonetheless. Also, OpenCV's edge detection is noticeably better than mine, both in quality and processing speed.
 
 #### Control Image
 
