@@ -84,7 +84,7 @@ Here is an example of how to include images in your GitHub readme.
 
 ### Control Image
 
-![alt text](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog.png "Control")
+<img src="[/path/to/control/image.png](https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog.png)" alt="Control" width="30%"/>
 
 ### Naive-Processed Images
 
