@@ -115,7 +115,7 @@ The following images were generated to show how each effect impacts a given vide
 
 ### Video Processing Tests
 
-For the given video, 100 frames were processed with different settings. Grayscale was skipped due to its simplicity, and there is enough information here to show that parallelization significantly speeds up processing.
+For the given video, 100 frames were processed with different settings. Grayscale was skipped due to its simplicity, as well as the fact that grayscaling is needed for edge detection anyway.
 
 #### Gaussian Blur
 | Number of Threads | Naive Processing Time (s) | SIMD Processing Time (s) |
@@ -124,25 +124,25 @@ For the given video, 100 frames were processed with different settings. Grayscal
 | 2                 | 4.11                      | 2.36                     |
 | 4                 | 2.72                      | 1.53                     |
 | 8                 | 2.29                      | 1.33                     |
-<img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/gauss_graph.png" alt="Gaussian Blur Graph" width="60%"/>
+<img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/gauss_graph.png" alt="Gaussian Blur Graph" width="62%"/>
 
 #### Edge Detection
 | Number of Threads | Naive Processing Time (s) | SIMD Processing Time (s) |
 |:-----------------:|:-------------------------:|:------------------------:|
-| 1                 | 0                       | 0                   |
-| 2                 | 0                       | 0                   |
-| 4                 | 0                       | 0                   |
-| 8                 | 0                       | 0                   |
-<img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_edge.png" alt="Edge Detection Graph" width="60%"/>
+| 1                 | 1.13                      | 0.95                     |
+| 2                 | 0.60                      | 0.50                     |
+| 4                 | 0.40                      | 0.25                     |
+| 8                 | 0.23                      | 0.13                     |
+<img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/edge_graph.png" alt="Edge Detection Graph" width="62%"/>
 
-#### Gaussian Blur + Grayscale + Edge Detection
+#### Gaussian Blur + Edge Detection
 | Number of Threads | Naive Processing Time (s) | SIMD Processing Time (s) |
 |:-----------------:|:-------------------------:|:------------------------:|
-| 1                 | 0                       | 0                   |
-| 2                 | 0                       | 0                   |
-| 4                 | 0                       | 0                   |
-| 8                 | 0                       | 0                   |
-<img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_full.png" alt="Full Graph" width="60%"/>
+| 1                 | 8.22                      | 5.04                     |
+| 2                 | 4.35                      | 2.59                     |
+| 4                 | 2.97                      | 1.69                     |
+| 8                 | 2.45                      | 1.34                     |
+<img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/full_graph.png" alt="Full Graph" width="62%"/>
 
 ## Analysis
 
