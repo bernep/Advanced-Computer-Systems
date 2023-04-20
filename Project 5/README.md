@@ -88,13 +88,15 @@ I used the first funny video that I could find as a means of testing the video p
 | Frame Width  | 360   |
 | Total Frames | 2818  |
 
+### Image Processing Tests
+
 The following images were generated to show how each effect impacts a given video frame. For this video frame, grayscale and edge detection are easy to see, but Gaussian blur is very subtle. Gaussian blur works better on videos with more detail, but the effect is there nonetheless. Also, OpenCV's edge detection is much better than mine, both in quality and processing speed, which can be seen with these image tests.
 
-### Control Image
+#### Control Image
 
 <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog.png" alt="Control" width="35%"/>
 
-### Naive-Processed Images (Gaussian Blur, Grayscale, Edge Detection, All Effects)
+#### Naive-Processed Images (Gaussian Blur, Grayscale, Edge Detection, All Effects)
 
 <p float="left">
   <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_gauss.png" alt="Gaussian Blur" width="35%"/>
@@ -103,7 +105,7 @@ The following images were generated to show how each effect impacts a given vide
   <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_full.png" alt="All Effects" width="35%"/>
 </p>
 
-### SIMD-Processed Images (Gaussian Blur, Grayscale, Edge Detection, All Effects)
+#### SIMD-Processed Images (Gaussian Blur, Grayscale, Edge Detection, All Effects)
 <p float="left">
   <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_gauss.png" alt="Gaussian Blur" width="35%"/>
   <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_gray.png" alt="Gaussian Blur" width="35%"/>
@@ -111,6 +113,14 @@ The following images were generated to show how each effect impacts a given vide
   <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_full.png" alt="All Effects" width="35%"/>
 </p>
 
+### Video Processing Tests
+
+TBD
+
 ## Analysis
 
+TBD
+
 ## Conclusion
+
+TBD
