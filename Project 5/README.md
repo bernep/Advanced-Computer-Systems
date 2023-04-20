@@ -115,7 +115,7 @@ The following images were generated to show how each effect impacts a given vide
 
 ### Video Processing Tests
 
-The processing time for this video (all frames) was analyzed for various threads, and with/without SIMD instructions on each image processing algorithm. Grayscale was skipped due to its simplicity and to avoid clutter.
+For the given video, 100 frames were processed with different settings. Grayscale was skipped due to its simplicity, and there is enough information here to show that parallelization significantly speeds up processing.
 
 #### Gaussian Blur
 | Number of Threads | Naive Processing Time (s) | SIMD Processing Time (s) |
@@ -124,7 +124,7 @@ The processing time for this video (all frames) was analyzed for various threads
 | 2                 | 0                       | 0                   |
 | 4                 | 0                       | 0                   |
 | 8                 | 0                       | 0                   |
-<img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_gauss.png" alt="Gaussian Blur Graph" width="50%"/>
+<img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_gauss.png" alt="Gaussian Blur Graph" width="65%"/>
 
 #### Edge Detection
 | Number of Threads | Naive Processing Time (s) | SIMD Processing Time (s) |
@@ -133,7 +133,7 @@ The processing time for this video (all frames) was analyzed for various threads
 | 2                 | 0                       | 0                   |
 | 4                 | 0                       | 0                   |
 | 8                 | 0                       | 0                   |
-<img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_edge.png" alt="Edge Detection Graph" width="50%"/>
+<img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_edge.png" alt="Edge Detection Graph" width="65%"/>
 
 #### Gaussian Blur + Grayscale + Edge Detection
 | Number of Threads | Naive Processing Time (s) | SIMD Processing Time (s) |
@@ -142,7 +142,7 @@ The processing time for this video (all frames) was analyzed for various threads
 | 2                 | 0                       | 0                   |
 | 4                 | 0                       | 0                   |
 | 8                 | 0                       | 0                   |
-<img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_full.png" alt="Full Graph" width="50%"/>
+<img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_full.png" alt="Full Graph" width="65%"/>
 
 ## Analysis
 
