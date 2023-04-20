@@ -2,7 +2,6 @@
 
 // Import libraries
 #include "proj5.h"
-#include <emmintrin.h>
 
 // Function: Grayscale
 void grayscale(FrameData* f_dat) {
