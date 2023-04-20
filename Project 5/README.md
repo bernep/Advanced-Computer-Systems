@@ -115,7 +115,15 @@ The following images were generated to show how each effect impacts a given vide
 
 ### Video Processing Tests
 
-TBD
+<p float="left">
+  | Effect         | Naive Processing Time (s) | SIMD Processing Time (s) |
+  |:--------------:|:-------------------------:|:------------------------:|
+  | Gaussian Blur  | 0                   | 0                   |
+  | Edge Detection | 0                   | 0                   |
+  | Grayscale      | 0                   | 0                   |
+  | All Three      | 0                   | 0                   |
+  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_gauss.png" alt="Gaussian Blur" width="35%"/>
+</p>
 
 ## Analysis
 
