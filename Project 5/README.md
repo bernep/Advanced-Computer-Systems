@@ -1,7 +1,7 @@
 # Project 5: Video Processing using Multiple Threads and SIMD Parallelization
 
 ## Overview
-Video processing can be a time-consuming process, though its inherent nature makes it ripe for parallel processing. Any video can be broken down into individual frames, and thus into separate worker threads. Within each of these threads, SIMD instructions can be used to speed up image processing computations on the desired frame. As such, the aim of this project is to analyze how parallelizing, both through multithreading and instrinsic instructions usage, significantly speeds up video processing.
+Video processing can be a time-consuming process, though its inherent nature makes it ripe for parallel processing. Any video can be broken down into individual frames, and thus into separate worker threads. Within each of these threads, SIMD instructions can be used to speed up image processing computations on the desired frame. As such, the aim of this project is to analyze how parallelizing through the usage of both through multithreading SIMD instructions can significantly speed up video processing.
 
 ## Code Structure
 There are five files in this project: <br>
@@ -97,18 +97,18 @@ The following images were generated to show how each effect impacts a given vide
 ### Naive-Processed Images (Gaussian Blur, Grayscale, Edge Detection, All Effects)
 
 <p float="left">
-  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_gauss.png" alt="Gaussian Blur" width="40%"/>
-  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_gray.png" alt="Gaussian Blur" width="40%"/>
-  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_edge.png" alt="Edge Detection" width="40%"/>
-  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_full.png" alt="All Effects" width="40%"/>
+  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_gauss.png" alt="Gaussian Blur" width="35%"/>
+  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_gray.png" alt="Gaussian Blur" width="35%"/>
+  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_edge.png" alt="Edge Detection" width="35%"/>
+  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_full.png" alt="All Effects" width="35%"/>
 </p>
 
 ### SIMD-Processed Images (Gaussian Blur, Grayscale, Edge Detection, All Effects)
 <p float="left">
-  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_gauss.png" alt="Gaussian Blur" width="40%"/>
-  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_gray.png" alt="Gaussian Blur" width="40%"/>
-  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_edge.png" alt="Edge Detection" width="40%"/>
-  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_full.png" alt="All Effects" width="40%"/>
+  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_gauss.png" alt="Gaussian Blur" width="35%"/>
+  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_gray.png" alt="Gaussian Blur" width="35%"/>
+  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_edge.png" alt="Edge Detection" width="35%"/>
+  <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_full.png" alt="All Effects" width="35%"/>
 </p
 
 ## Analysis
