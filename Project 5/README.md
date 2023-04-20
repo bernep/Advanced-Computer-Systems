@@ -1,7 +1,7 @@
 # Project 5: Video Processing using Multiple Threads and SIMD Parallelization
 
 ## Overview
-Video processing can be a time-consuming process, though its inherent nature makes it ripe for parallel processing. Any video can be broken down into individual frames, and thus into separate worker threads. Within each of these threads, SIMD instructions can be used to speed up image processing computations on the desired frame. As such, the aim of this project is to analyze how parallelizing through the usage of both through multithreading SIMD instructions can significantly speed up video processing.
+Video processing can be a time-consuming process, though its inherent nature makes it ripe for parallel processing. Any video can be broken down into individual frames, and thus into separate worker threads. Within each of these threads, SIMD instructions can be used to speed up image processing computations on the desired frame. As such, the aim of this project is to analyze how using multithreading and SIMD instructions as means of parallelization can significantly speed up video processing.
 
 ## Code Structure
 There are five files in this project: <br>
