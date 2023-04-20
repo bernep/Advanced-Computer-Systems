@@ -79,6 +79,16 @@ Once the code is up and running, follow the instructions given by the terminal p
 
 ## Experimental Results
 
+I used the first funny video I could find as a means of testing the video processing algorithms. The video can be found [here](https://www.youtube.com/watch?v=TnlakHr-O4w), and the video metadata is as follows:
+
+Video Metadata: <br>
+| Metric       | Value |
+|:------------:|:-----:|
+| FPS          | 24    |
+| Frame Height | 540   |
+| Frame Width  | 360   |
+| Total Frames | 2818  |
+
 The following images were generated to show how each effect impacts a given video frame. For this video frame, grayscale and edge detection are easy to see, but Gaussian blur is very subtle. Gaussian blur works better on videos with more detail, but the effect is there nonetheless. Also, OpenCV's edge detection is much better than mine, both in quality and processing speed, which can be seen with these image tests.
 
 ### Control Image
