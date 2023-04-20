@@ -120,11 +120,11 @@ For the given video, 100 frames were processed with different settings. Grayscal
 #### Gaussian Blur
 | Number of Threads | Naive Processing Time (s) | SIMD Processing Time (s) |
 |:-----------------:|:-------------------------:|:------------------------:|
-| 1                 | 0                       | 0                   |
-| 2                 | 0                       | 0                   |
-| 4                 | 0                       | 0                   |
-| 8                 | 0                       | 0                   |
-<img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_gauss.png" alt="Gaussian Blur Graph" width="65%"/>
+| 1                 | 7.61                      | 4.39                     |
+| 2                 | 4.11                      | 2.36                     |
+| 4                 | 2.72                      | 1.53                     |
+| 8                 | 2.29                      | 1.33                     |
+<img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/gauss_graph.png" alt="Gaussian Blur Graph" width="60%"/>
 
 #### Edge Detection
 | Number of Threads | Naive Processing Time (s) | SIMD Processing Time (s) |
@@ -133,7 +133,7 @@ For the given video, 100 frames were processed with different settings. Grayscal
 | 2                 | 0                       | 0                   |
 | 4                 | 0                       | 0                   |
 | 8                 | 0                       | 0                   |
-<img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_edge.png" alt="Edge Detection Graph" width="65%"/>
+<img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_edge.png" alt="Edge Detection Graph" width="60%"/>
 
 #### Gaussian Blur + Grayscale + Edge Detection
 | Number of Threads | Naive Processing Time (s) | SIMD Processing Time (s) |
@@ -142,7 +142,7 @@ For the given video, 100 frames were processed with different settings. Grayscal
 | 2                 | 0                       | 0                   |
 | 4                 | 0                       | 0                   |
 | 8                 | 0                       | 0                   |
-<img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_full.png" alt="Full Graph" width="65%"/>
+<img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_full.png" alt="Full Graph" width="60%"/>
 
 ## Analysis
 
