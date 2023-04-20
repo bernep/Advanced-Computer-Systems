@@ -23,7 +23,7 @@ In this project implementation, most functions were implemented manually, but so
 | Grayscale (SIMD)        | N                     |
 
 ## Setup Instructions
-1) OpenCV is needed to run this program. Please follow the instructions for OpenCV setup here: https://docs.opencv.org/4.x/d7/d9f/tutorial_linux_install.html
+1) OpenCV is needed to compile this program. Please follow the instructions for OpenCV setup [here](https://docs.opencv.org/4.x/d7/d9f/tutorial_linux_install.html).
 2) `ffmpeg` is not technically required, but without it, the output video will not have any audio. On Debian systems, this can be installed and then verified with the following commands:
 ```
 sudo apt update
