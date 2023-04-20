@@ -78,9 +78,8 @@ Once the code is up and running, follow the instructions given by the terminal p
 * 32GB of Memory
 
 ## Experimental Results
-# My Project
 
-Here is an example of how to include images in your GitHub readme.
+The following images were generated to show how each effect impacts a given video frame. For this video frame, grayscale and edge detection are easy to see, but Gaussian blur is very subtle. Gaussian blur works better on videos with more detail, but the effect is there nonetheless. Also, OpenCV's edge detection is much better than mine, both in quality and processing speed, which can be seen with these image tests.
 
 ### Control Image
 
