@@ -90,26 +90,26 @@ Here is an example of how to include images in your GitHub readme.
 
 <div style="display:flex;flex-wrap:wrap;">
   <div style="width:33%;">
-    <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_gauss.png" alt="Gaussian Blur" width="100%"/>
+    <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_gauss.png" alt="Gaussian Blur" width="33%"/>
   </div>
   <div style="width:33%;">
-    <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_gauss.png" alt="Gaussian Blur" width="100%"/>
+    <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_gauss.png" alt="Gaussian Blur" width="33%"/>
   </div>
   <div style="width:33%;">
-    <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_edge.png" alt="Edge Detection" width="100%"/>
+    <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog0_edge.png" alt="Edge Detection" width="33%"/>
   </div>
 </div>
 
 ### SIMD-Processed Images
 <div style="display:flex;flex-wrap:wrap;">
   <div style="width:33%;">
-    <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_gauss.png" alt="Gaussian Blur" width="100%"/>
+    <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_gauss.png" alt="Gaussian Blur" width="33%"/>
   </div>
   <div style="width:33%;">
-    <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_gauss.png" alt="Gaussian Blur" width="100%"/>
+    <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_gauss.png" alt="Gaussian Blur" width="33%"/>
   </div>
   <div style="width:33%;">
-    <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_edge.png" alt="Edge Detection" width="100%"/>
+    <img src="https://github.com/bernep/Advanced-Computer-Systems/blob/main/Project%205/images/dog1_edge.png" alt="Edge Detection" width="33%"/>
   </div>
 </div>
 
